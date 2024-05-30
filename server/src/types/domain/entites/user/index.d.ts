@@ -3,7 +3,7 @@ interface IBuildMakeUser {
   validateEmail: IValidateEmail;
 }
 
-interface IUserMethods {
+interface IMakeUserMethods {
   getId: () => string;
   getEmail: () => string;
   getFirstName: () => string;

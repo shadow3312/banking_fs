@@ -1,7 +1,7 @@
 export default function makeBuildUser({
   Id,
   validateEmail,
-}: IBuildMakeUser): (user: IUser) => IUserMethods {
+}: IBuildMakeUser): (user: IUser) => IMakeUserMethods {
   return function makeUser({
     id = Id.makeId(),
     email,
@@ -10,7 +10,7 @@ export default function makeBuildUser({
     city,
     dwollaCustomerId,
     dwollaCustomerUrl,
-  }: IUser): IUserMethods {
+  }: IUser): IMakeUserMethods {
     //#region field validation
     if (!Id.isValidId(id)) {
       throw new Error(`User must have a valid id`);
@@ -21,13 +21,13 @@ export default function makeBuildUser({
     if (email && !validateEmail.isValidEmail(email)) {
       throw new Error(`Invalid email`);
     }
-    if (!firstName || firstName.length <= 3) {
+    if (!firstName || firstName.length < 3) {
       throw new Error(`firstName must have at least 3 characters`);
     }
-    if (!lastName || lastName.length <= 3) {
+    if (!lastName || lastName.length < 3) {
       throw new Error(`lastName must have at least 3 characters`);
     }
-    if (!city || city.length <= 3) {
+    if (!city || city.length < 3) {
       throw new Error(`City must have at least 3 characters`);
     }
     if (!dwollaCustomerId) {
@@ -38,7 +38,7 @@ export default function makeBuildUser({
     }
     //#endregion
 
-    return Object.freeze<IUserMethods>({
+    return Object.freeze<IMakeUserMethods>({
       getId: () => id,
       getEmail: () => email,
       getFirstName: () => firstName,
@@ -49,3 +49,6 @@ export default function makeBuildUser({
     });
   };
 }
+
+const dev = 11;
+export { dev };

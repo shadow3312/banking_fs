@@ -5,14 +5,15 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "commonjs",
-    "rootDir": "./src",
+    "rootDir": "./",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["src/*"],
+      "~/*": ["__test__/fixtures/*"]
     },
     "typeRoots": ["./types", "./node_modules/@types"]
   },
