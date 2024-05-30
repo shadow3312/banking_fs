@@ -17,6 +17,6 @@
     },
     "typeRoots": ["./types", "./node_modules/@types"]
   },
-  "include": ["src/**/*.ts", "src/types/**/*.d.ts"],
+  "include": ["src/**/*.ts", "src/types/**/*.d.ts", "__test__/fixtures/*.ts"],
   "exclude": ["node_modules"]
 }

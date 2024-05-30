@@ -1,11 +1,5 @@
+import Id from "@/shared/utils/Id";
 import { faker } from "@faker-js/faker";
-import { createId, isCuid } from "@paralleldrive/cuid2";
-
-const id: string = createId();
-const Id = Object.freeze({
-  makeId: () => id,
-  isValidId: (id: string) => isCuid(id),
-});
 
 export default function makeFakeUser(overrides: Partial<IUser> = {}): IUser {
   const user: IUser = {
