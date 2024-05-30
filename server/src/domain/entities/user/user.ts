@@ -1,4 +1,4 @@
-export default function makeBuildUser({
+export default function buildMakeUser({
   Id,
   validateEmail,
 }: IBuildMakeUser): (user: IUser) => IMakeUserMethods {
@@ -49,6 +49,3 @@ export default function makeBuildUser({
     });
   };
 }
-
-const dev = 11;
-export { dev };
