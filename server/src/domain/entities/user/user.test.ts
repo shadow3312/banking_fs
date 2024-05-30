@@ -3,16 +3,25 @@ import makeFakeUser from "~/user";
 import makeUser from ".";
 
 describe("User", () => {
+  const userObject: Partial<IUser> = {
+    firstName: "John",
+    lastName: "Doe",
+    city: "New York",
+    email: "email@gmail.com",
+    dwollaCustomerId: "c43ndnjuwi3nndb",
+    dwollaCustomerUrl: "random-url",
+  };
   it("can be created", () => {
-    const insert = makeFakeUser({
-      firstName: "John",
-      lastName: "Doe",
-    });
+    const insert = makeFakeUser(userObject);
     const user = makeUser(insert);
 
     expect(user.getId()).toBeDefined();
-    expect(user.getFirstName()).toBe("John");
-    expect(user.getLastName()).toBe("Doe");
+    expect(user.getFirstName()).toBe(userObject.firstName);
+    expect(user.getLastName()).toBe(userObject.lastName);
+    expect(user.getCity()).toBe(userObject.city);
+    expect(user.getEmail()).toBe(userObject.email);
+    expect(user.getDwollaCustomerId()).toBe(userObject.dwollaCustomerId);
+    expect(user.getDwollaCustomerUrl()).toBe(userObject.dwollaCustomerUrl);
   });
   it("requires a valid id", () => {
     const insert = makeFakeUser({
