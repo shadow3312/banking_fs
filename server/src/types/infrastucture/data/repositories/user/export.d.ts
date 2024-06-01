@@ -1,8 +1,9 @@
 import { User } from "@/infrastructure/data/models/user/user.model";
 import { Sequelize } from "sequelize";
 
-interface IMakeUserRepository {
+export interface IMakeUserRepository {
   models: IModels;
+  userToObject: (user: IMakeUserMethods) => IUser;
 }
 
 interface IModels {

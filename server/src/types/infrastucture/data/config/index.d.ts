@@ -23,8 +23,4 @@ interface IDbConfig {
   production: IConfig;
 }
 
-interface IModels {
-  User: IUser;
-}
-
 type Environment = keyof IDbConfig;
