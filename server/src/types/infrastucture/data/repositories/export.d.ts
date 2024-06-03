@@ -1,5 +1,6 @@
-import { Transaction } from "@/infrastructure/data/models/user/transaction.model";
-import { User } from "@/infrastructure/data/models/user/user.model";
+import { Bank } from "@/infrastructure/data/models/bank.models";
+import { Transaction } from "@/infrastructure/data/models/transaction.model";
+import { User } from "@/infrastructure/data/models/user.model";
 import { Sequelize } from "sequelize";
 
 export interface IMakeRepository {
@@ -14,4 +15,5 @@ export interface IBuildMakeRepository {
 export interface IModels {
   User: typeof User;
   Transaction: typeof Transaction;
+  Bank: typeof Bank;
 }
