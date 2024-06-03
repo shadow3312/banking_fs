@@ -16,6 +16,7 @@ export default function makeUserRepository({
 
   function adaptUser(user: IMakeUserMethods) {
     const obj = userToObject(user);
+    return obj;
   }
 
   async function findAll() {

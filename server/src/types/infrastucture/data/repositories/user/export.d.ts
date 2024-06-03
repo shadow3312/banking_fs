@@ -6,6 +6,6 @@ export interface IMakeUserRepository {
   userToObject: (user: IMakeUserMethods) => IUser;
 }
 
-interface IModels {
+export interface IModels {
   User: typeof User;
 }

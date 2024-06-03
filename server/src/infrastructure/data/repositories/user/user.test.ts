@@ -26,25 +26,62 @@ describe("User repository", () => {
     await models.User.destroy({ where: {} });
   });
 
+  const userObject: IUser = {
+    id: "wj3ojndioo0ejkl",
+    firstName: "John",
+    lastName: "Doe",
+    city: "New York",
+    email: "email@gmail.com",
+    dwollaCustomerId: "c43ndnjuwi3nndb",
+    dwollaCustomerUrl: "random-url",
+  };
+  const userObject2: IUser = {
+    id: "zk2ojndbfho0epsk",
+    firstName: "Mack",
+    lastName: "Jeff",
+    city: "London",
+    email: "email@gmail.com",
+    dwollaCustomerId: "c43ndnjuwi3nndb",
+    dwollaCustomerUrl: "random-url",
+  };
+
   afterAll(async () => {
     await db.drop();
     await db.close();
   });
 
-  it("can list all users", async () => {
-    const data1 = makeFakeUser();
-    const data2 = makeFakeUser();
-    const user1 = makeUser(data1);
-    const user2 = makeUser(data2);
-    const userObj1 = userToObject(user1);
-    const userObj2 = userToObject(user2);
-    const inserts = await Promise.all(
-      [userObj1, userObj2].map(userRepository.create)
-    );
-    const found = await userRepository.findAll();
+  describe("findAll", () => {
+    it("should return all users", async () => {
+      const user1 = await models.User.create(userObject);
+      const user2 = await models.User.create(userObject2);
 
-    expect.assertions(inserts.length);
+      const results = await userRepository.findAll();
 
-    return inserts.forEach((insert) => expect(found).toContainEqual(insert));
+      expect(results).toHaveLength(2);
+      expect(results[0]).toEqual(userObject);
+    });
+  });
+
+  describe("findByPk", () => {
+    it("should return a user if found", async () => {
+      const user = await models.User.create(userObject);
+
+      const result = await userRepository.findById("wj3ojndioo0ejkl");
+
+      expect(result).toEqual(userObject);
+    });
+    it("should throw an error if user not found", async () => {
+      await expect(userRepository.findById("fake")).rejects.toThrow(
+        "Failed to find user by ID"
+      );
+    });
+  });
+
+  describe("create", () => {
+    it("should create a user", async () => {
+      const result = await userRepository.create(userObject);
+
+      expect(result).toEqual(userObject);
+    });
   });
 });
