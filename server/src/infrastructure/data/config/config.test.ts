@@ -1,11 +1,18 @@
-import { afterAll, beforeEach, describe, expect, it } from "@jest/globals";
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+} from "@jest/globals";
 import { makeDb } from ".";
 import { Sequelize } from "sequelize";
 
 describe("Database connection", () => {
   let db: Sequelize;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     db = await makeDb();
   });
 

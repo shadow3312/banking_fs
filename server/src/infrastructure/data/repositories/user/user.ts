@@ -1,23 +1,25 @@
-import { IMakeUserRepository } from "@/types/infrastucture/data/repositories/user/export";
+import {
+  IBuildMakeRepository,
+  IMakeRepository,
+} from "@/types/infrastucture/data/repositories/export";
+import { User } from "../../models/user/user.model";
 
 export default function makeUserRepository({
   models,
-  userToObject,
-}: IMakeUserRepository): IUserRepository {
-  const model = models.User;
+}: IBuildMakeRepository): IUserRepository {
+  const model = models.User as typeof User;
   const verboseName = "user";
 
   return Object.freeze({
-    adaptUser,
     findAll,
     findById,
     create,
   });
 
-  function adaptUser(user: IMakeUserMethods) {
-    const obj = userToObject(user);
-    return obj;
-  }
+  // function adaptUser(user: IMakeUserMethods) {
+  //   const obj = userToObject(user);
+  //   return obj;
+  // }
 
   async function findAll() {
     try {

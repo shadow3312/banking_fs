@@ -7,13 +7,13 @@ export class User
   extends Model<IUser, UserCreationAttributes>
   implements IUser
 {
-  public id!: string;
-  public firstName!: string;
-  public lastName!: string;
-  public email!: string;
-  public city!: string;
-  public dwollaCustomerId!: string;
-  public dwollaCustomerUrl!: string;
+  declare id: string;
+  declare firstName: string;
+  declare lastName: string;
+  declare email: string;
+  declare city: string;
+  declare dwollaCustomerId: string;
+  declare dwollaCustomerUrl: string;
 }
 
 export function initializeUser(sequelize: Sequelize): typeof User {

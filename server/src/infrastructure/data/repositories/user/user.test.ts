@@ -2,17 +2,12 @@ import {
   afterAll,
   afterEach,
   beforeAll,
-  beforeEach,
   describe,
   expect,
   it,
 } from "@jest/globals";
 import { Sequelize } from "sequelize";
 import { makeDb, models } from "../../config";
-import makeUserRepository from "./user";
-import makeFakeUser from "~/user";
-import makeUser from "@/domain/entities/user";
-import userToObject from "../../adapters/user";
 import userRepository from ".";
 
 describe("User repository", () => {
@@ -52,8 +47,8 @@ describe("User repository", () => {
 
   describe("findAll", () => {
     it("should return all users", async () => {
-      const user1 = await models.User.create(userObject);
-      const user2 = await models.User.create(userObject2);
+      await models.User.create(userObject);
+      await models.User.create(userObject2);
 
       const results = await userRepository.findAll();
 
@@ -64,7 +59,7 @@ describe("User repository", () => {
 
   describe("findByPk", () => {
     it("should return a user if found", async () => {
-      const user = await models.User.create(userObject);
+      await models.User.create(userObject);
 
       const result = await userRepository.findById("wj3ojndioo0ejkl");
 
@@ -82,6 +77,30 @@ describe("User repository", () => {
       const result = await userRepository.create(userObject);
 
       expect(result).toEqual(userObject);
+    });
+  });
+
+  describe("update", () => {
+    it("should update an existing user", async () => {
+      const user = await models.User.create(userObject);
+      const newData = {
+        lastName: "Marc",
+        email: "new@gmail.com",
+      };
+      const updatedUser = await userRepository.update(user.id, newData);
+
+      expect(updatedUser).toEqual(expect.objectContaining(newData));
+    });
+  });
+
+  describe("remove", () => {
+    it("should remove an existing user", async () => {
+      const user = await models.User.create(userObject);
+
+      await userRepository.remove(user.id);
+
+      const deletedUser = await models.User.findByPk(user.id);
+      expect(deletedUser).toBeNull();
     });
   });
 });
