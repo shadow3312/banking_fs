@@ -1,7 +1,7 @@
 import {
   afterAll,
   afterEach,
-  beforeAll,
+  beforeEach,
   describe,
   expect,
   it,
@@ -13,9 +13,9 @@ import bankRepository from ".";
 describe("Bank repository", () => {
   let db: Sequelize;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     db = await makeDb();
-  });
+  }, 10000);
 
   afterEach(async () => {
     await models.Bank.destroy({ where: {} });
@@ -38,7 +38,6 @@ describe("Bank repository", () => {
     userId: "n3ognlwn33okm",
   };
   afterAll(async () => {
-    await db.drop();
     await db.close();
   });
 
@@ -62,10 +61,9 @@ describe("Bank repository", () => {
 
       expect(result).toEqual(bankObject);
     });
-    it("should throw an error if bank not found", async () => {
-      await expect(bankRepository.findById("fake")).rejects.toThrow(
-        "Failed to find bank by ID"
-      );
+    it("should return null if bank not found", async () => {
+      const found = await bankRepository.findById("fake");
+      expect(found).toBeNull();
     });
   });
 

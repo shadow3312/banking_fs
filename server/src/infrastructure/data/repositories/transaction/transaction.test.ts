@@ -1,7 +1,7 @@
 import {
   afterAll,
   afterEach,
-  beforeAll,
+  beforeEach,
   describe,
   expect,
   it,
@@ -13,12 +13,16 @@ import transactionRepository from ".";
 describe("Transaction repository", () => {
   let db: Sequelize;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     db = await makeDb();
-  });
+  }, 10000);
 
   afterEach(async () => {
     await models.Transaction.destroy({ where: {} });
+  });
+
+  afterAll(async () => {
+    await db.close();
   });
 
   const transactionObject: ITransaction = {
@@ -47,11 +51,6 @@ describe("Transaction repository", () => {
     receiverBankId: "d54ndnijdone",
   };
 
-  afterAll(async () => {
-    await db.drop();
-    await db.close();
-  });
-
   describe("findAll", () => {
     it("should return all transactions", async () => {
       await models.Transaction.create(transactionObject);
@@ -72,10 +71,9 @@ describe("Transaction repository", () => {
 
       expect(result).toEqual(transactionObject);
     });
-    it("should throw an error if transaction not found", async () => {
-      await expect(transactionRepository.findById("fake")).rejects.toThrow(
-        "Failed to find transaction by ID"
-      );
+    it("should return null if transaction not found", async () => {
+      const found = await transactionRepository.findById("fake");
+      expect(found).toBeNull();
     });
   });
 

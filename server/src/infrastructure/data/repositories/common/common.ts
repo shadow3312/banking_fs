@@ -23,11 +23,7 @@ export default function buildMakeRepository({ models }: IBuildMakeRepository) {
       try {
         const instance = await model.findByPk(id);
 
-        if (!instance) {
-          throw new Error(`${verboseName} not found`);
-        }
-
-        return instance?.toJSON();
+        return instance ? instance.toJSON() : null;
       } catch (error) {
         throw new Error(`Failed to find ${verboseName} by ID`);
       }

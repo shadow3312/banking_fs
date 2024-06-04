@@ -1,3 +1,0 @@
-interface IMakeAddUser {
-  userRepository: IUserRepository;
-}

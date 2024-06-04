@@ -1,7 +1,7 @@
 import {
   afterAll,
   afterEach,
-  beforeAll,
+  beforeEach,
   describe,
   expect,
   it,
@@ -9,11 +9,12 @@ import {
 import { Sequelize } from "sequelize";
 import { makeDb, models } from "../../config";
 import userRepository from ".";
+import { userObject, userObject2 } from "@/shared/utils/const";
 
 describe("User repository", () => {
   let db: Sequelize;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     db = await makeDb();
   });
 
@@ -21,27 +22,7 @@ describe("User repository", () => {
     await models.User.destroy({ where: {} });
   });
 
-  const userObject: IUser = {
-    id: "wj3ojndioo0ejkl",
-    firstName: "John",
-    lastName: "Doe",
-    city: "New York",
-    email: "email@gmail.com",
-    dwollaCustomerId: "c43ndnjuwi3nndb",
-    dwollaCustomerUrl: "random-url",
-  };
-  const userObject2: IUser = {
-    id: "zk2ojndbfho0epsk",
-    firstName: "Mack",
-    lastName: "Jeff",
-    city: "London",
-    email: "email@gmail.com",
-    dwollaCustomerId: "c43ndnjuwi3nndb",
-    dwollaCustomerUrl: "random-url",
-  };
-
   afterAll(async () => {
-    await db.drop();
     await db.close();
   });
 
@@ -65,10 +46,9 @@ describe("User repository", () => {
 
       expect(result).toEqual(userObject);
     });
-    it("should throw an error if user not found", async () => {
-      await expect(userRepository.findById("fake")).rejects.toThrow(
-        "Failed to find user by ID"
-      );
+    it("should return null if user not found", async () => {
+      const found = await userRepository.findById("fake");
+      expect(found).toBeNull();
     });
   });
 

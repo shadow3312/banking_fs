@@ -33,10 +33,10 @@ Object.values(models).forEach((model) => {
 export async function makeDb(): Promise<Sequelize> {
   try {
     await sequelize.sync({ force: true });
-    console.log("Tables synced successfully.");
+    env.NODE_ENV !== "test" && console.log("Tables synced successfully.");
     return sequelize;
   } catch (error) {
-    throw new Error(`Unable to connect db: ${error}`);
+    throw new Error(`Unable to sync tables: ${error}`);
   }
 }
 

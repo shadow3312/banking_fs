@@ -1,7 +1,7 @@
 export default function buildMakeUser({
   Id,
   validateEmail,
-}: IBuildMakeUser): (user: IUser) => IMakeUserMethods {
+}: IBuildMakeUser): (user: Partial<IUser>) => IMakeUserMethods {
   return function makeUser({
     id = Id.makeId(),
     email,
@@ -10,7 +10,7 @@ export default function buildMakeUser({
     city,
     dwollaCustomerId,
     dwollaCustomerUrl,
-  }: IUser): IMakeUserMethods {
+  }: Partial<IUser>): IMakeUserMethods {
     //#region field validation
     if (!Id.isValidId(id)) {
       throw new Error(`User must have a valid id`);

@@ -1,9 +1,9 @@
 import { models } from "../../config";
 import makeRepository from "../common";
 
-const transactionRepository = makeRepository<IUser>({
+const userRepository = makeRepository<IUser>({
   verboseName: "user",
   model: models.User,
 });
 
-export default transactionRepository;
+export default userRepository;
