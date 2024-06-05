@@ -8,3 +8,4 @@ interface IRepository<T> {
 
 type IUserRepository = IRepository<IUser>;
 type ITransactionRepository = IRepository<ITransaction>;
+type IBankRepository = IRepository<IBank>;

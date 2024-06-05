@@ -25,4 +25,49 @@ const userObject2: IUser = {
   dwollaCustomerUrl: "random-url",
 };
 
-export { userObject, userObject2, cleanUserObject };
+const transactionObject: ITransaction = {
+  id: "wj3ojndioo0ejkl",
+  name: "John",
+  email: "email@gmail.com",
+  channel: "Online",
+  amount: "50",
+  category: "Transfer",
+  senderId: "c43ndnjuwi3nndb",
+  receiverId: "d54ndnjuwi3sjjkd",
+  senderBankId: "dir23ndnjuwi3niew",
+  receiverBankId: "d54ndnijdone",
+};
+
+const cleanTransactionObject: Partial<ITransaction> = {
+  name: "John",
+  email: "email@gmail.com",
+  channel: "Online",
+  amount: "50",
+  category: "Transfer",
+  senderId: "c43ndnjuwi3nndb",
+  receiverId: "d54ndnjuwi3sjjkd",
+  senderBankId: "dir23ndnjuwi3niew",
+  receiverBankId: "d54ndnijdone",
+};
+
+const transactionObject2: ITransaction = {
+  id: "jsi2oodj203kie9",
+  name: "Jack",
+  email: "email@gmail.com",
+  channel: "Online",
+  amount: "50",
+  category: "Debit",
+  senderId: "c43ndnjuwi3nndb",
+  receiverId: "d54ndnjuwi3sjjkd",
+  senderBankId: "dir23ndnjuwi3niew",
+  receiverBankId: "d54ndnijdone",
+};
+
+export {
+  userObject,
+  userObject2,
+  cleanUserObject,
+  transactionObject,
+  transactionObject2,
+  cleanTransactionObject,
+};

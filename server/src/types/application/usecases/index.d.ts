@@ -7,15 +7,22 @@ interface IMakeUseCase<T> {
   repository: T;
 }
 
-// interface IMakeAddUserUseCase {
-//   repository: IUserRepository;
-//   toObject: (methods: IMakeUserMethods) => IUser;
-// }
-
 type IMakeObjectUserUseCase = IMakeObjectUseCase<
   IUserRepository,
   IMakeUserMethods,
   IUser
+>;
+
+type IMakeObjectTransactionUseCase = IMakeObjectUseCase<
+  ITransactionRepository,
+  IMakeTransactionMethods,
+  ITransaction
+>;
+
+type IMakeObjectBankUseCase = IMakeObjectUseCase<
+  IBankRepository,
+  IMakeBankMethods,
+  IBank
 >;
 
 type IMakeBankUsecase = IMakeUsecase<IBankRepository, IMakeBankMethods, IBank>;

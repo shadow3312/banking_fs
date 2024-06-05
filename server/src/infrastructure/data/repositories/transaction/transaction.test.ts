@@ -9,6 +9,7 @@ import {
 import { Sequelize } from "sequelize";
 import { makeDb, models } from "../../config";
 import transactionRepository from ".";
+import { transactionObject, transactionObject2 } from "@/shared/utils/const";
 
 describe("Transaction repository", () => {
   let db: Sequelize;
@@ -24,32 +25,6 @@ describe("Transaction repository", () => {
   afterAll(async () => {
     await db.close();
   });
-
-  const transactionObject: ITransaction = {
-    id: "wj3ojndioo0ejkl",
-    name: "John",
-    email: "email@gmail.com",
-    channel: "Online",
-    amount: "50",
-    category: "Transfer",
-    senderId: "c43ndnjuwi3nndb",
-    receiverId: "d54ndnjuwi3sjjkd",
-    senderBankId: "dir23ndnjuwi3niew",
-    receiverBankId: "d54ndnijdone",
-  };
-
-  const transactionObject2: ITransaction = {
-    id: "jsi2oodj203kie9",
-    name: "Jack",
-    email: "email@gmail.com",
-    channel: "Online",
-    amount: "50",
-    category: "Debit",
-    senderId: "c43ndnjuwi3nndb",
-    receiverId: "d54ndnjuwi3sjjkd",
-    senderBankId: "dir23ndnjuwi3niew",
-    receiverBankId: "d54ndnijdone",
-  };
 
   describe("findAll", () => {
     it("should return all transactions", async () => {

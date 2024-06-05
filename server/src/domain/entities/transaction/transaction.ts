@@ -2,7 +2,7 @@ export default function buildMakeTransaction({
   Id,
   validateEmail,
 }: IBuildMakeTransaction): (
-  transaction: ITransaction
+  transaction: Partial<ITransaction>
 ) => IMakeTransactionMethods {
   return function makeTransaction({
     id = Id.makeId(),
@@ -15,7 +15,7 @@ export default function buildMakeTransaction({
     receiverId,
     senderBankId,
     receiverBankId,
-  }: ITransaction) {
+  }: Partial<ITransaction>) {
     //#region field validation
     if (!Id.isValidId(id)) {
       throw new Error(`Transaction must have a valid id`);
