@@ -63,6 +63,31 @@ const transactionObject2: ITransaction = {
   receiverBankId: "d54ndnijdone",
 };
 
+const bankObject: IBank = {
+  id: "ahgs67s87sshds",
+  accessToken: "dnksodnvkonow3nw",
+  fundingSourceUrl: "http://source.url",
+  accountId: "wqojfwiqff",
+  publicId: "sio32n3202d42n",
+  userId: "ruri3ofn0ei49",
+};
+const bankObject2: IBank = {
+  id: "a7aw6uwugiasb8",
+  accessToken: "nwin32oinefnff",
+  fundingSourceUrl: "http://source.url",
+  accountId: "nw2930jfndn",
+  publicId: "oerjgep3lewn",
+  userId: "n3ognlwn33okm",
+};
+
+const cleanBankObject: Partial<IBank> = {
+  accessToken: "dnksodnvkonow3nw",
+  fundingSourceUrl: "http://source.url",
+  accountId: "wqojfwiqff",
+  publicId: "sio32n3202d42n",
+  userId: "ruri3ofn0ei49",
+};
+
 export {
   userObject,
   userObject2,
@@ -70,4 +95,7 @@ export {
   transactionObject,
   transactionObject2,
   cleanTransactionObject,
+  bankObject,
+  bankObject2,
+  cleanBankObject,
 };

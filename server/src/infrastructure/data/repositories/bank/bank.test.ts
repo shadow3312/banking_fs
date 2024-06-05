@@ -9,6 +9,7 @@ import {
 import { Sequelize } from "sequelize";
 import { makeDb, models } from "../../config";
 import bankRepository from ".";
+import { bankObject, bankObject2 } from "@/shared/utils/const";
 
 describe("Bank repository", () => {
   let db: Sequelize;
@@ -21,22 +22,6 @@ describe("Bank repository", () => {
     await models.Bank.destroy({ where: {} });
   });
 
-  const bankObject: IBank = {
-    id: "ahgs67s87sshds",
-    accessToken: "dnksodnvkonow3nw",
-    fundingSourceUrl: "http://source.url",
-    accountId: "wqojfwiqff",
-    publicId: "sio32n3202d42n",
-    userId: "ruri3ofn0ei49",
-  };
-  const bankObject2: IBank = {
-    id: "a7aw6uwugiasb8",
-    accessToken: "nwin32oinefnff",
-    fundingSourceUrl: "http://source.url",
-    accountId: "nw2930jfndn",
-    publicId: "oerjgep3lewn",
-    userId: "n3ognlwn33okm",
-  };
   afterAll(async () => {
     await db.close();
   });

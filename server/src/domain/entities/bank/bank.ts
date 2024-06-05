@@ -1,6 +1,6 @@
 export default function buildMakeBank({
   Id,
-}: IBuildMakeBank): (bank: IBank) => IMakeBankMethods {
+}: IBuildMakeBank): (bank: Partial<IBank>) => IMakeBankMethods {
   return function makeBank({
     id = Id.makeId(),
     accessToken,
@@ -8,7 +8,7 @@ export default function buildMakeBank({
     accountId,
     publicId,
     userId,
-  }: IBank): IMakeBankMethods {
+  }: Partial<IBank>): IMakeBankMethods {
     //#region field validation
     if (!Id.isValidId(id)) {
       throw new Error(`Bank must have a valid id`);
