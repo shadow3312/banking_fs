@@ -1,4 +1,4 @@
-import { AppError } from "@/errors/appError";
+import { AppError } from "@/shared/errors/appError";
 import {
   IHttpError,
   IHttpResponse,
