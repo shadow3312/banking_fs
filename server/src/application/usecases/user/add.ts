@@ -1,4 +1,5 @@
 import makeUser from "@/domain/entities/user";
+import { AppError } from "@/errors/appError";
 
 export default function makeAddUserUseCase({
   repository,
@@ -9,7 +10,7 @@ export default function makeAddUserUseCase({
     const exists = await repository.findById(user.getId());
 
     if (exists) {
-      throw new Error(`Duplicate user id`);
+      throw new AppError("DUPLICATE_RESOURCE");
     }
 
     const userObj = toObject(user);

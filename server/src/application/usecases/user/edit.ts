@@ -1,4 +1,5 @@
 import makeUser from "@/domain/entities/user";
+import { AppError } from "@/errors/appError";
 
 export default function makeEditUserUseCase({
   repository,
@@ -9,12 +10,12 @@ export default function makeEditUserUseCase({
 ) => Promise<IUser> {
   return async function editUser(id: string, data: Partial<IUser>) {
     if (!id) {
-      throw new Error("You must supply an id");
+      throw new AppError("VALIDATION_ERROR", "You must supply an id");
     }
     const existing = await repository.findById(id);
 
     if (!existing) {
-      throw new RangeError("User not found");
+      throw new AppError("NOT_FOUND");
     }
 
     const newData = { ...existing, ...data };

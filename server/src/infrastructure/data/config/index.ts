@@ -32,7 +32,7 @@ Object.values(models).forEach((model) => {
 
 export async function makeDb(): Promise<Sequelize> {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
     env.NODE_ENV !== "test" && console.log("Tables synced successfully.");
     return sequelize;
   } catch (error) {
