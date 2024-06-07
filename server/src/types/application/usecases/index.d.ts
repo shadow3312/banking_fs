@@ -1,6 +1,7 @@
 interface IMakeObjectUseCase<R, M, T> {
   repository: R;
   toObject: (methods: M) => T;
+  passwordProvider?: IPasswordProvider;
 }
 
 interface IMakeUseCase<T> {

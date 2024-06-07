@@ -5,6 +5,7 @@ export default function buildMakeUser({
   return function makeUser({
     id = Id.makeId(),
     email,
+    password,
     firstName,
     lastName,
     city,
@@ -20,6 +21,12 @@ export default function buildMakeUser({
     }
     if (email && !validateEmail.isValidEmail(email)) {
       throw new Error(`Invalid email`);
+    }
+    if (!password) {
+      throw new Error(`Password is required`);
+    }
+    if (password.length < 6) {
+      throw new Error(`Password must have at least 6 characters`);
     }
     if (!firstName || firstName.length < 3) {
       throw new Error(`firstName must have at least 3 characters`);
@@ -41,11 +48,15 @@ export default function buildMakeUser({
     return Object.freeze<IMakeUserMethods>({
       getId: () => id,
       getEmail: () => email,
+      getPassword: () => password!,
       getFirstName: () => firstName,
       getLastName: () => lastName,
       getCity: () => city,
       getDwollaCustomerId: () => dwollaCustomerId,
       getDwollaCustomerUrl: () => dwollaCustomerUrl,
+      setPasswordHash: (passwordHash: string) => {
+        password = passwordHash;
+      },
     });
   };
 }

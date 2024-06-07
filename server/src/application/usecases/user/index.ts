@@ -5,10 +5,14 @@ import makeGetUserUseCase from "./get";
 import makeListUsersUseCase from "./list";
 import makeEditUserUseCase from "./edit";
 import makeRemoveUserUseCase from "./remove";
+import PasswordProvider from "@/infrastructure/providers/passwordHasher";
+
+const passwordProvider = PasswordProvider();
 
 const addUser = makeAddUserUseCase({
   repository: userRepository,
   toObject: userToObject,
+  passwordProvider: passwordProvider,
 });
 
 const editUser = makeEditUserUseCase({

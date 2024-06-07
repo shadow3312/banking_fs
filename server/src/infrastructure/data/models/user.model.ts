@@ -11,6 +11,7 @@ export class User
   declare firstName: string;
   declare lastName: string;
   declare email: string;
+  declare password: string;
   declare city: string;
   declare dwollaCustomerId: string;
   declare dwollaCustomerUrl: string;
@@ -33,6 +34,11 @@ export function initializeUser(sequelize: Sequelize): typeof User {
         allowNull: false,
       },
       email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
         type: DataTypes.STRING,
         allowNull: false,
       },

@@ -29,6 +29,16 @@ export default function buildMakeRepository({ models }: IBuildMakeRepository) {
       }
     }
 
+    async function findByEmail(email: string) {
+      try {
+        const instance = await model.findOne({ where: { email } });
+
+        return instance ? instance.toJSON() : null;
+      } catch (error) {
+        throw new Error(`Failed to find ${verboseName} by email`);
+      }
+    }
+
     async function create(data: T) {
       try {
         const instance = await model.create(data);
@@ -67,6 +77,7 @@ export default function buildMakeRepository({ models }: IBuildMakeRepository) {
     return Object.freeze({
       findAll,
       findById,
+      findByEmail,
       create,
       update,
       remove,

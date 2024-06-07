@@ -2,7 +2,10 @@ export type ErrorCode =
   | "NOT_FOUND"
   | "VALIDATION_ERROR"
   | "INTERNAL_ERROR"
-  | "DUPLICATE_RESOURCE";
+  | "DUPLICATE_RESOURCE"
+  | "AUTH_INVALID_CREDENTIALS"
+  | "AUTH_PASSWORD_MISMATCH"
+  | "EMAIL_EXISTS";
 
 export interface IErrorCodeDetails {
   message: string;
@@ -20,10 +23,22 @@ export const ERROR_CODES: Record<ErrorCode, IErrorCodeDetails> = {
   },
   DUPLICATE_RESOURCE: {
     message: "Resource already exists",
-    statusCode: 402,
+    statusCode: 409,
+  },
+  EMAIL_EXISTS: {
+    message: "Email already exists",
+    statusCode: 409,
   },
   INTERNAL_ERROR: {
     message: "Internal server error",
     statusCode: 500,
+  },
+  AUTH_INVALID_CREDENTIALS: {
+    message: "Invalid credentials",
+    statusCode: 400,
+  },
+  AUTH_PASSWORD_MISMATCH: {
+    message: "Email or password wrong",
+    statusCode: 400,
   },
 };
