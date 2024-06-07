@@ -6,7 +6,7 @@ import {
   getSingleBank,
   patchBank,
   postBank,
-} from "../controllers/bank";
+} from "../../http/controllers/bank";
 
 const router = Router();
 

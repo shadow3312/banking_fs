@@ -6,7 +6,7 @@ import {
   getSingleTransaction,
   patchTransaction,
   postTransaction,
-} from "../controllers/transaction";
+} from "../../http/controllers/transaction";
 
 const router = Router();
 

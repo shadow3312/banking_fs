@@ -6,7 +6,7 @@ import {
   getSingleUser,
   patchUser,
   postUser,
-} from "../controllers/user";
+} from "../../http/controllers/user";
 import isAuthenticated from "../middlewares";
 
 const router = Router();

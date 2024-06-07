@@ -7,7 +7,7 @@ import {
   bankRouter,
   transactionRouter,
   userRouter,
-} from "./presentation/routes";
+} from "./presentation/http/routes";
 const app = express();
 const port = env.PORT || 3001;
 
