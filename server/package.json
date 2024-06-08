@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",
+    "@trpc/server": "^11.0.0-rc.394",
     "bcrypt": "^5.1.1",
     "envalid": "^8.0.0",
     "express": "^4.19.2",
@@ -41,6 +42,8 @@
     "mysql2": "^3.10.0",
     "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.3",
-    "sequelize-typescript": "^2.1.6"
+    "sequelize-typescript": "^2.1.6",
+    "superjson": "1.13.3",
+    "zod": "^3.23.8"
   }
 }

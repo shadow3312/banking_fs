@@ -6,7 +6,7 @@
     "target": "ESNext",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "module": "commonjs",
+    "module": "CommonJS",
     "rootDir": "./",
     "outDir": "./dist",
     "strict": true,

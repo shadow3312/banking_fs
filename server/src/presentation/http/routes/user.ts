@@ -11,10 +11,10 @@ import isAuthenticated from "../middlewares";
 
 const router = Router();
 
-router.get("/", isAuthenticated, makeCallback(getAllUsers));
+router.get("/", makeCallback(getAllUsers));
 router.post("/", makeCallback(postUser));
-router.get(":id", makeCallback(getSingleUser));
-router.patch(":id", makeCallback(patchUser));
-router.delete(":id", makeCallback(deleteUser));
+router.get("/:id", makeCallback(getSingleUser));
+router.patch("/:id", makeCallback(patchUser));
+router.delete("/:id", makeCallback(deleteUser));
 
 export default router;

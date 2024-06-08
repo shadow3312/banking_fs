@@ -13,6 +13,9 @@ export default function makeAuthenticateUserUseCase({
     email: string,
     password: string
   ): Promise<ILoginReturn> {
+    if (!email || !password) {
+      throw new AppError("VALIDATION_ERROR", "Email and password required");
+    }
     const user = await userRepository.findByEmail(email);
 
     if (!user) {

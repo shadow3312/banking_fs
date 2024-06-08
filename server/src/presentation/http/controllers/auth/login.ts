@@ -10,9 +10,11 @@ export default function makeLogin({ authenticateUser }: IMakeLoginController) {
   ): Promise<IUserResponse> {
     try {
       const { email, password } = httpRequest.body;
+
       const user = await authenticateUser(email, password);
       return setJsonReponse({ statusCode: 200, body: user });
     } catch (error) {
+      console.log("err", error);
       return catchError(error);
     }
   };
