@@ -35,3 +35,9 @@ interface ILoginReturn {
   user: IUser;
   token: string;
 }
+
+interface AuthFormProps {
+  type: AuthType;
+}
+
+type AuthType = "login" | "register";

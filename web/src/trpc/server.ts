@@ -3,7 +3,7 @@ import type { AppRouter } from "~/app";
 import superjson from "superjson";
 import { getServerAuthSession } from "@/server/auth";
 
-export const trpcClient = createTRPCClient<AppRouter>({
+export const api = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
       url: "http://localhost:3001/trpc",

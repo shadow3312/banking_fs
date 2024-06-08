@@ -1,7 +1,9 @@
-import { getUser, listUsers } from "@/application/usecases/user";
-import { protectedProcedure, publicProcedure, router } from "./trpc";
+import { addUser, getUser, listUsers } from "@/application/usecases/user";
+import { authMiddleware, publicProcedure, router } from "./trpc";
 import { z } from "zod";
-import { TRPCError } from "@trpc/server";
+import { userSchema } from "./schemas";
+
+const protectedProcedure = publicProcedure.use(authMiddleware);
 
 const userRouter = router({
   getAll: protectedProcedure.query(async ({ ctx }) => {
@@ -12,6 +14,13 @@ const userRouter = router({
     const { input } = opts;
 
     const user = await getUser(input);
+
+    return user as IUser;
+  }),
+  create: publicProcedure.input(userSchema).mutation(async (opts) => {
+    const { input } = opts;
+
+    const user = await addUser(input);
 
     return user as IUser;
   }),

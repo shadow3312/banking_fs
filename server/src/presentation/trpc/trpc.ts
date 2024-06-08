@@ -1,7 +1,6 @@
 import { initTRPC } from "@trpc/server";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import superjson from "superjson";
-// import { authMiddleware } from "./middleware";
 import JWTProvider from "@/infrastructure/providers/jwt";
 // import { middleware } from "./trpc";
 import { TRPCError } from "@trpc/server";
@@ -24,11 +23,10 @@ type Context = Awaited<ReturnType<typeof createContext>> & IContext;
 const t = initTRPC.context<Context>().create({ transformer: superjson });
 
 const { router, middleware, createCallerFactory } = t;
-
 export { router, createCallerFactory, middleware };
 export const publicProcedure = t.procedure;
 
-export const authMiddleware = t.middleware(async ({ ctx, next }) => {
+export const authMiddleware = middleware(async ({ ctx, next }) => {
   const jwtProvider = JWTProvider();
 
   const authHeader = ctx.req.headers.authorization;
@@ -62,4 +60,4 @@ export const authMiddleware = t.middleware(async ({ ctx, next }) => {
   return next();
 });
 
-export const protectedProcedure = publicProcedure.use(authMiddleware);
+// export const protectedProcedure = publicProcedure.use(authMiddleware);

@@ -1,3 +1,125 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 222 47% 11%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 209 38% 28%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 206 21% 15%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* #region AUTH*/
+  .auth-container {
+    @apply dark:bg  flex h-screen flex-col justify-center p-8;
+  }
+  .auth-wrapper {
+    @apply elevate mx-auto h-auto grid-cols-2 rounded-2xl bg-white dark:shadow-none md:grid md:w-3/4;
+  }
+  .auth-bottom {
+    @apply absolute bottom-12 flex gap-1;
+  }
+
+  .auth-left {
+    @apply relative col-span-1 flex flex-col items-center justify-center rounded-l-2xl py-24 dark:bg-muted-foreground md:px-24;
+  }
+
+  .auth-form-wrapper {
+    @apply w-full space-y-4 text-center;
+  }
+
+  .form-title {
+    @apply text-xl font-bold;
+  }
+
+  .form-subtitle {
+    @apply mb-6;
+  }
+
+  input.form-input {
+    @apply rounded-lg border-none bg-slate-100 ring-0 focus:border-none focus:ring-0 dark:text-black;
+  }
+
+  .auth-form {
+    @apply space-y-4;
+  }
+
+  /* #endregion */
+  .elevate {
+    @apply shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)];
+  }
+
+  .rounded-button {
+    @apply !rounded-2xl !px-6 dark:text-white;
+  }
+
+  .bg {
+    background-color: #130f40;
+    background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
+  }
+}
