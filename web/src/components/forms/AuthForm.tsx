@@ -16,12 +16,13 @@ import Spinner from "../Spinner";
 import { useRouter } from "next/navigation";
 import { isObjectClean } from "@/lib/utils";
 import { registerUser } from "@/server/actions/auth.actions";
+import { useCookies } from "next-client-cookies";
 
 import { faker } from "@faker-js/faker";
 
 export default function AuthForm({ type }: AuthFormProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState<IUser | null>(null);
+  const cookies = useCookies();
 
   const router = useRouter();
 
@@ -83,14 +84,26 @@ export default function AuthForm({ type }: AuthFormProps) {
         }
       } else {
         if (isObjectClean(values)) {
-          console.log("v", values);
-          const user = await registerUser(values as IRegisterPayload);
+          // Register a new user
+          const newUser = await registerUser(values as IRegisterPayload);
 
           setIsLoading(false);
-          console.log("userr", user);
-          // if (user) {
-          //   setUser(user);
-          // }
+
+          toast({
+            title: "Hold on",
+            description: "You are being redirected quickly",
+          });
+
+          if (newUser) {
+            // If user is successfuly registered, login
+            await signIn("credentials", {
+              email: newUser.email,
+              password: values.password!,
+              callbackUrl: "/",
+            });
+
+            cookies.set("justRegistered", "true");
+          }
         }
       }
     } catch (error) {
@@ -101,9 +114,9 @@ export default function AuthForm({ type }: AuthFormProps) {
     <div className="auth-form-wrapper">
       <header className="form-header">
         <h3 className="form-title">{isLoginForm ? `LOGIN` : `REGISTER`}</h3>
-        <Button onClick={() => fillForm()}>
-          Fill the form with random data
-        </Button>
+        {!isLoginForm && (
+          <Button onClick={() => fillForm()}>Auto-fill the form</Button>
+        )}
       </header>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="auth-form">

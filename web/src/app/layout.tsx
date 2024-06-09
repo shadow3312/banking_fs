@@ -4,7 +4,10 @@ import { GeistSans } from "geist/font/sans";
 import { Gabarito as FontSans } from "next/font/google";
 
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import { CookiesProvider } from "next-client-cookies/server";
 import { Toaster } from "@/components/ui/toaster";
+import { getServerAuthSession } from "@/server/auth";
+import Provider from "@/providers/SessionProvider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -17,18 +20,23 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerAuthSession();
   return (
     <html lang="en">
       <body className={`${fontSans.className}`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <Provider session={session}>
+          <CookiesProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {children}
+              <Toaster />
+            </ThemeProvider>
+          </CookiesProvider>
+        </Provider>
       </body>
     </html>
   );

@@ -10,3 +10,9 @@ export function isObjectClean(obj: Record<string, any>): boolean {
     ([key, value]) => value !== undefined && value !== null && value !== "",
   );
 }
+
+export function extractCustomerId(url: string): string | undefined {
+  const parts = url.split("/");
+  const id = parts[parts.length - 1];
+  return id;
+}

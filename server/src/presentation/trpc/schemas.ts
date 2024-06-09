@@ -9,7 +9,7 @@ export const registerSchema = z.object({
   ssn: z.string(),
   dateOfBirth: z.string(),
   state: z.string(),
-  adress1: z.string(),
+  address1: z.string(),
   postalCode: z.string(),
   dwollaCustomerUrl: z.string(),
   dwollaCustomerId: z.string(),

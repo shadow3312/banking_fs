@@ -3,10 +3,11 @@
 import { api } from "@/trpc/server";
 import { createDwollaCustomer } from "./dwolla.actions";
 import { signIn } from "next-auth/react";
+import { extractCustomerId } from "@/lib/utils";
 
 export async function registerUser(userPayload: IRegisterPayload) {
   try {
-    const { email, password, firstName, lastName } = userPayload;
+    const { email, password } = userPayload;
 
     // First create the dwolla customer to generate the customerUrl
     const dwollaCustomerUrl = await createDwollaCustomer({
@@ -16,22 +17,23 @@ export async function registerUser(userPayload: IRegisterPayload) {
 
     if (!dwollaCustomerUrl) throw new Error(`Failed to create dwolla customer`);
 
-    console.log("url", dwollaCustomerUrl);
     // Next extract the id from the customerUrl
 
-    // const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
+    const dwollaCustomerId = extractCustomerId(dwollaCustomerUrl);
 
-    // const user = await api.auth.register.mutate({
-    //   ...userPayload,
-    //   dwollaCustomerUrl,
-    //   dwollaCustomerId
-    // });
+    if (!dwollaCustomerId) {
+      throw new Error(`Failed to extract dwolla customer id`);
+    }
 
-    // if (user) {
-    //   await signIn("credentials", {email, password, redirect: false})
-    // }
+    const user = await api.auth.register.mutate({
+      ...userPayload,
+      dwollaCustomerUrl,
+      dwollaCustomerId,
+    });
 
-    // return user;
+    console.log("user", user);
+
+    return user;
   } catch (error) {
     console.log(error);
   }

@@ -126,4 +126,12 @@
     background-color: #130f40;
     background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
   }
+
+  .dialog-title {
+    @apply !text-2xl;
+  }
+
+  .dialog-description {
+    @apply !text-gray-400;
+  }
 }
