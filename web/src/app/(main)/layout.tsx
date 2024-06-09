@@ -1,3 +1,5 @@
+import MobileNav from "@/components/MobileNav";
+import Sidebar from "@/components/Sidebar";
 import { getServerAuthSession } from "@/server/auth";
 import { redirect } from "next/navigation";
 
@@ -14,5 +16,13 @@ export default async function MainLayout({
   const session = await getServerAuthSession();
 
   if (!session) redirect("/login");
-  return <main>{children}</main>;
+  return (
+    <main className="main-wrapper">
+      <Sidebar user={session.user.user} />
+      <div className="main">
+        {children}
+        <MobileNav />
+      </div>
+    </main>
+  );
 }

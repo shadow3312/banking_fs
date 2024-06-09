@@ -16,3 +16,16 @@ export function extractCustomerId(url: string): string | undefined {
   const id = parts[parts.length - 1];
   return id;
 }
+
+export const truncateText = (text: string, maxChars: number) => {
+  if (text) {
+    let txt = text?.slice(0, maxChars);
+
+    if (text.length > maxChars) {
+      txt += "...";
+    }
+
+    return txt;
+  }
+  return "";
+};
