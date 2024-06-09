@@ -65,18 +65,25 @@ interface IRegisterPayload {
   state: string;
 }
 
-interface SidebarProps {
+interface NavProps {
   user: IUser;
 }
 
 interface NavItem {
   title: string;
+  mobileTitle?: string;
   href: string;
   icon: (isActive: boolean) => any;
 }
 
 interface NavLinks {
   sidebarConfig: NavItem[];
+}
+
+interface UserAvatarProps {
+  src?: string;
+  alt?: string;
+  fallback?: string;
 }
 
 type AuthType = "login" | "register";

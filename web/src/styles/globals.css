@@ -76,21 +76,24 @@
 
   /* #region AUTH*/
   .auth-container {
-    @apply dark:bg  flex h-screen flex-col justify-center p-8;
+    @apply dark:bg  flex h-screen flex-col justify-center p-4;
   }
   .auth-wrapper {
-    @apply elevate mx-auto h-auto grid-cols-2 rounded-2xl bg-white dark:shadow-none md:grid md:w-3/4;
+    @apply elevate mx-auto h-auto w-full grid-cols-2 rounded-2xl bg-white dark:shadow-none md:grid md:w-3/4;
   }
   .auth-bottom {
-    @apply absolute bottom-12 flex gap-1;
+    @apply flex gap-1 pt-6 md:absolute md:bottom-12 md:mt-0;
   }
 
   .auth-left {
-    @apply relative col-span-1 flex flex-col items-center justify-center rounded-l-2xl py-24 dark:bg-muted-foreground md:px-24;
+    @apply relative col-span-1 flex flex-col items-center justify-center rounded-l-2xl rounded-r-2xl py-24 dark:bg-muted-foreground md:rounded-r-none md:px-24;
   }
 
+  .auth-right {
+    @apply col-span-1 rounded-r-2xl bg-secondary dark:bg-primary;
+  }
   .auth-form-wrapper {
-    @apply w-full space-y-4 text-center;
+    @apply w-full space-y-4 px-2 text-center;
   }
 
   .form-title {
@@ -122,7 +125,7 @@
   }
 
   .nav-items {
-    @apply space-y-5;
+    @apply flex w-full flex-row items-center justify-around md:flex-col md:items-start md:space-y-5;
   }
 
   .nav-icon-wrapper {
@@ -130,18 +133,22 @@
   }
 
   .nav-icon-wrapper.active {
-    @apply rounded-full bg-primary dark:bg-white;
+    @apply rounded-full bg-white dark:bg-white md:bg-primary;
   }
 
   .nav-icon-active {
-    @apply !font-bold !text-white dark:!text-black;
+    @apply !font-bold !text-black dark:!text-black md:!text-white;
+  }
+
+  .nav-title {
+    @apply text-sm text-white md:text-base md:text-black md:dark:text-white;
   }
   .nav-title.active {
     @apply font-medium;
   }
 
   .nav-link {
-    @apply flex items-center gap-4;
+    @apply flex flex-col items-center md:flex-row md:gap-4;
   }
   .nav-link.active {
     @apply border-r-2 border-primary dark:border-gray-600;
@@ -151,11 +158,11 @@
     @apply h-2 w-2 rounded-full bg-primary dark:bg-white;
   }
   .mobile-nav-wrapper {
-    @apply fixed bottom-4 left-0 z-40 w-full;
+    @apply fixed bottom-4 left-0 z-40 w-full md:hidden;
   }
 
   .mobile-nav {
-    @apply relative mx-auto flex h-[60px] w-11/12 items-center rounded-xl bg-[#151414] px-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)];
+    @apply relative mx-auto flex h-[60px] w-11/12 items-center rounded-xl bg-primary px-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)];
   }
 
   .sidebar-bottom {

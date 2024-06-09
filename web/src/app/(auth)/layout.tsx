@@ -17,7 +17,7 @@ export default async function MainLayout({
             </div>
             {children}
           </div>
-          <div className="col-span-1 rounded-r-2xl bg-secondary dark:bg-primary"></div>
+          <div className="auth-right"></div>
         </div>
         <div className="auth-bottom">
           <Avatar>

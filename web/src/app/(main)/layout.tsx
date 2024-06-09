@@ -21,7 +21,7 @@ export default async function MainLayout({
       <Sidebar user={session.user.user} />
       <div className="main">
         {children}
-        <MobileNav />
+        <MobileNav user={session.user.user} />
       </div>
     </main>
   );

@@ -1,12 +1,11 @@
 "use client";
 
-import { createNaveLinks } from "@/config/links";
+import { navLinks } from "@/config/links";
 import { cn, truncateText } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import ThemeToggle from "./ThemeToggle";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import LogoutButton from "./LogoutButton";
 import {
   Tooltip,
@@ -14,12 +13,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
+import UserAvatar from "./UserAvatar";
 
-export default function Sidebar({ user }: SidebarProps) {
+export default function Sidebar({ user }: NavProps) {
   const pathname = usePathname();
 
-  const className = "dark:text-white";
-  const navLinks = createNaveLinks(className);
   return (
     <aside className="sidebar">
       <div className="mb-16 flex items-center justify-between">
@@ -47,10 +45,7 @@ export default function Sidebar({ user }: SidebarProps) {
         })}
       </div>
       <div className="sidebar-bottom">
-        <Avatar>
-          <AvatarImage src="/icons/user.png" alt="user" />
-          <AvatarFallback>U</AvatarFallback>
-        </Avatar>
+        <UserAvatar />
         <div className="flex flex-col justify-between">
           <p>
             {user.firstName} {user.lastName}
