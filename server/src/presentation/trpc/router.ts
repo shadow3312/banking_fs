@@ -1,7 +1,8 @@
 import { addUser, getUser, listUsers } from "@/application/usecases/user";
 import { authMiddleware, publicProcedure, router } from "./trpc";
 import { z } from "zod";
-import { userSchema } from "./schemas";
+import { loginSchema, registerSchema } from "./schemas";
+import authenticateUser from "@/application/usecases/authentication";
 
 const protectedProcedure = publicProcedure.use(authMiddleware);
 
@@ -17,17 +18,27 @@ const userRouter = router({
 
     return user as IUser;
   }),
-  create: publicProcedure.input(userSchema).mutation(async (opts) => {
+});
+const authRouter = router({
+  register: publicProcedure.input(registerSchema).mutation(async (opts) => {
     const { input } = opts;
 
     const user = await addUser(input);
 
     return user as IUser;
   }),
+  login: publicProcedure.input(loginSchema).mutation(async (opts) => {
+    const { input } = opts;
+
+    const user = await authenticateUser(input.email, input.password);
+
+    return user;
+  }),
 });
 
 const appRouter = router({
   users: userRouter,
+  auth: authRouter,
 });
 
 export default appRouter;

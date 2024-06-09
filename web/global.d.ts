@@ -40,4 +40,12 @@ interface AuthFormProps {
   type: AuthType;
 }
 
+interface IRegisterPayload {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  city: string;
+}
+
 type AuthType = "login" | "register";

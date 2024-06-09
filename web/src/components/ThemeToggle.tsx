@@ -4,6 +4,7 @@ import { LoaderIcon, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import Spinner from "./Spinner";
 
 type Props = {
   setTheme: (theme: string) => void;
@@ -24,7 +25,7 @@ export default function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return <LoaderIcon className="animate-spin" />;
+    return <Spinner />;
   }
   return (
     <div className="cursor-pointer" onClick={toggleTheme}>

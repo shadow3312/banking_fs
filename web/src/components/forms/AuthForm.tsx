@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { authFormSchema } from "@/lib/schemas";
@@ -10,8 +10,19 @@ import { Button } from "../ui/button";
 import FormInput from "../FormInput";
 import { LogIn } from "lucide-react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { toast } from "../ui/use-toast";
+import Spinner from "../Spinner";
+import { useRouter } from "next/navigation";
+import { isObjectClean } from "@/lib/utils";
+import { registerUser } from "@/server/actions/auth.actions";
 
 export default function AuthForm({ type }: AuthFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState<IUser | null>(null);
+
+  const router = useRouter();
+
   const isLoginForm = type === "login";
 
   const formSchema = authFormSchema(type);
@@ -19,7 +30,56 @@ export default function AuthForm({ type }: AuthFormProps) {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {}
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    try {
+      if (isLoginForm) {
+        const loginPayload = {
+          email: values.email,
+          password: values.password,
+        };
+        const result = await signIn("credentials", {
+          ...loginPayload,
+          redirect: false,
+        });
+
+        if (result?.error) {
+          setIsLoading(false);
+          console.log(result.error);
+          toast({
+            title: "Error",
+            description: "Invalid credentials",
+          });
+        } else {
+          setIsLoading(false);
+          router.push("/");
+        }
+      } else {
+        const { email, password, firstName, lastName, city } = values;
+        const userPayload = {
+          email,
+          password,
+          firstName,
+          lastName,
+          city,
+        };
+        if (isObjectClean(userPayload)) {
+          const definedUserPayload = userPayload as IRegisterPayload;
+          console.log("loading...");
+
+          const user = await registerUser(definedUserPayload);
+
+          setIsLoading(false);
+          console.log("userr", user);
+          // if (user) {
+          //   setUser(user);
+          // }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="auth-form-wrapper">
       <header className="form-header">
@@ -60,7 +120,12 @@ export default function AuthForm({ type }: AuthFormProps) {
             placeholder="Your password"
           />
 
-          <Button className="rounded-button" type="submit">
+          <Button className="rounded-button" type="submit" disabled={isLoading}>
+            {isLoading && (
+              <div className="mr-2">
+                <Spinner />
+              </div>
+            )}
             Let me in <LogIn className="ml-4 h-4 w-4" />
           </Button>
         </form>

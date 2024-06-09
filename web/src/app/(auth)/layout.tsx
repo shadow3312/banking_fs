@@ -1,5 +1,4 @@
-import AuthForm from "@/components/forms/AuthForm";
-import ThemeToggle from "@/components/theme-toggle";
+import ThemeToggle from "@/components/ThemeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Heart } from "lucide-react";
 
