@@ -14,6 +14,11 @@ interface IUser {
   firstName: string;
   lastName: string;
   city: string;
+  dateOfBirth: string;
+  ssn: string;
+  postalCode: string;
+  address1: string;
+  state: string;
   dwollaCustomerId: string;
   dwollaCustomerUrl: string;
 }
@@ -40,12 +45,24 @@ interface AuthFormProps {
   type: AuthType;
 }
 
+interface IDwollaCustomer {
+  firstName: string;
+  lastName: string;
+  email: string;
+  type: string;
+}
+
 interface IRegisterPayload {
   email: string;
   password: string;
   firstName: string;
   lastName: string;
   city: string;
+  dateOfBirth: string;
+  ssn: string;
+  postalCode: string;
+  address1: string;
+  state: string;
 }
 
 type AuthType = "login" | "register";

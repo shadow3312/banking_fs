@@ -6,6 +6,13 @@ export const registerSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   city: z.string(),
+  ssn: z.string(),
+  dateOfBirth: z.string(),
+  state: z.string(),
+  adress1: z.string(),
+  postalCode: z.string(),
+  dwollaCustomerUrl: z.string(),
+  dwollaCustomerId: z.string(),
 });
 
 export const loginSchema = z.object({

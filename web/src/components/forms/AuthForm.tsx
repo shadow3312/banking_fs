@@ -17,6 +17,8 @@ import { useRouter } from "next/navigation";
 import { isObjectClean } from "@/lib/utils";
 import { registerUser } from "@/server/actions/auth.actions";
 
+import { faker } from "@faker-js/faker";
+
 export default function AuthForm({ type }: AuthFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
@@ -25,13 +27,38 @@ export default function AuthForm({ type }: AuthFormProps) {
 
   const isLoginForm = type === "login";
 
+  function makeUser(overrides: Partial<IUser> = {}): Partial<IUser> {
+    const user: Partial<IUser> = {
+      email: faker.internet.email(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      city: faker.location.city(),
+      ssn: "1234",
+      state: "CA",
+      address1: faker.location.street(),
+      postalCode: faker.location.zipCode(),
+      dateOfBirth: "1990-01-01",
+    };
+
+    return {
+      ...user,
+      ...overrides,
+    };
+  }
+
+  function fillForm() {
+    const user = makeUser();
+    form.reset(user);
+  }
+
   const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true);
+    const values = makeUser(data);
     try {
       if (isLoginForm) {
         const loginPayload = {
@@ -55,19 +82,9 @@ export default function AuthForm({ type }: AuthFormProps) {
           router.push("/");
         }
       } else {
-        const { email, password, firstName, lastName, city } = values;
-        const userPayload = {
-          email,
-          password,
-          firstName,
-          lastName,
-          city,
-        };
-        if (isObjectClean(userPayload)) {
-          const definedUserPayload = userPayload as IRegisterPayload;
-          console.log("loading...");
-
-          const user = await registerUser(definedUserPayload);
+        if (isObjectClean(values)) {
+          console.log("v", values);
+          const user = await registerUser(values as IRegisterPayload);
 
           setIsLoading(false);
           console.log("userr", user);
@@ -84,6 +101,9 @@ export default function AuthForm({ type }: AuthFormProps) {
     <div className="auth-form-wrapper">
       <header className="form-header">
         <h3 className="form-title">{isLoginForm ? `LOGIN` : `REGISTER`}</h3>
+        <Button onClick={() => fillForm()}>
+          Fill the form with random data
+        </Button>
       </header>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="auth-form">

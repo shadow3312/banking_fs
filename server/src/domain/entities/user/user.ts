@@ -9,6 +9,11 @@ export default function buildMakeUser({
     firstName,
     lastName,
     city,
+    dateOfBirth,
+    postalCode,
+    ssn,
+    address1,
+    state,
     dwollaCustomerId,
     dwollaCustomerUrl,
   }: Partial<IUser>): IMakeUserMethods {
@@ -24,6 +29,21 @@ export default function buildMakeUser({
     }
     if (!password) {
       throw new Error(`Password is required`);
+    }
+    if (!ssn) {
+      throw new Error(`Ssn is required`);
+    }
+    if (!state) {
+      throw new Error(`State is required`);
+    }
+    if (!postalCode) {
+      throw new Error(`Postal code is required`);
+    }
+    if (!address1) {
+      throw new Error(`Adress is required`);
+    }
+    if (!dateOfBirth) {
+      throw new Error(`DateOfBirth is required`);
     }
     if (password.length < 6) {
       throw new Error(`Password must have at least 6 characters`);
@@ -52,6 +72,11 @@ export default function buildMakeUser({
       getFirstName: () => firstName,
       getLastName: () => lastName,
       getCity: () => city,
+      getDateOfBirth: () => dateOfBirth,
+      getAdress: () => address1,
+      getPostalCode: () => postalCode,
+      getSsn: () => ssn,
+      getState: () => state,
       getDwollaCustomerId: () => dwollaCustomerId,
       getDwollaCustomerUrl: () => dwollaCustomerUrl,
       setPasswordHash: (passwordHash: string) => {

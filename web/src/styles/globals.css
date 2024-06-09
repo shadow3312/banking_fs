@@ -115,7 +115,11 @@
   }
 
   .rounded-button {
-    @apply !rounded-2xl !px-6 dark:text-white;
+    @apply !rounded-2xl !px-6;
+  }
+
+  button {
+    @apply dark:text-white;
   }
 
   .bg {

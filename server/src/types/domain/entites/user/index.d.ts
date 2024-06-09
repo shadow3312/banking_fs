@@ -5,6 +5,11 @@ interface IUser {
   firstName: string;
   lastName: string;
   city: string;
+  dateOfBirth: string;
+  ssn: string;
+  postalCode: string;
+  address1: string;
+  state: string;
   dwollaCustomerId: string;
   dwollaCustomerUrl: string;
 }
@@ -21,6 +26,11 @@ interface IMakeUserMethods {
   getFirstName: () => string;
   getLastName: () => string;
   getCity: () => string;
+  getDateOfBirth: () => string;
+  getSsn: () => string;
+  getState: () => string;
+  getPostalCode: () => string;
+  getAdress: () => string;
   getDwollaCustomerId: () => string;
   getDwollaCustomerUrl: () => string;
   setPasswordHash: (password: string) => void;
