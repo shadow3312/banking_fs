@@ -14,6 +14,7 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import UserAvatar from "./UserAvatar";
+import UserInfo from "./UserInfo";
 
 export default function Sidebar({ user }: NavProps) {
   const pathname = usePathname();
@@ -45,22 +46,7 @@ export default function Sidebar({ user }: NavProps) {
         })}
       </div>
       <div className="sidebar-bottom">
-        <UserAvatar fallback={getInitials([user.firstName, user.lastName])} />
-        <div className="flex flex-col justify-between">
-          <p>
-            {user.firstName} {user.lastName}
-          </p>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <p className="text-sm">{truncateText(user.email, 20)}</p>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{user.email}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
+        <UserInfo user={user} truncate />
         <div className="ml-auto">
           <LogoutButton />
         </div>

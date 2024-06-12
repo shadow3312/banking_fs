@@ -71,7 +71,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground md:overflow-y-hidden;
   }
 
   /* #region AUTH*/
@@ -178,6 +178,10 @@
   .title {
     @apply text-xl;
   }
+
+  .subtitle {
+    @apply text-lg;
+  }
   .elevate {
     @apply shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)];
   }
@@ -202,51 +206,75 @@
   .dialog-description {
     @apply !text-gray-400;
   }
-}
 
-/* #endregion */
+  .user-info {
+    @apply flex gap-2;
+  }
+  /* #endregion */
 
-/* #region MAIN SLOT LAYOUT */
-.main {
-  @apply h-screen p-4 md:p-8;
-}
-/* #enregion */
+  /* #region MAIN SLOT LAYOUT */
+  .main {
+    @apply h-screen p-4 md:p-8;
+  }
+  /* #enregion */
 
-/* #region HOME PAGE */
-.home-page {
-  @apply h-full grid-cols-3 md:grid;
-}
+  /* #region HOME PAGE */
+  .home-page {
+    @apply mb-24 h-full grid-cols-3 md:grid;
+  }
 
-.home-main {
-  @apply col-span-2;
-}
+  .home-main {
+    @apply col-span-2;
+  }
 
-.home-aside {
-  @apply col-span-1 h-full w-full space-y-4 rounded-2xl bg-primary p-4;
-}
+  .home-aside {
+    @apply col-span-1 h-full w-full space-y-6 rounded-2xl bg-primary p-4;
+  }
 
-.home-aside .title {
-  @apply text-white;
-}
+  .home-aside .title,
+  .home-aside .subtitle {
+    @apply text-white;
+  }
 
-.bank-card {
-  @apply h-[180px] w-[310px] rounded-xl p-4 text-white shadow-lg;
-  background-image: url("../assets/images/card-bg.png");
-}
+  .home-aside-bottom {
+    @apply space-y-4;
+  }
 
-.balance-title {
-  @apply text-2xl font-bold;
-}
+  .home-aside input.form-input {
+    @apply placeholder:text-gray-400 dark:border-solid dark:border-white dark:bg-transparent dark:text-white dark:focus:ring-0;
+  }
 
-.card-number-container {
-  @apply my-2;
-}
+  .list-users-wrapper {
+    @apply h-[300px] md:h-[150px];
+  }
 
-.card-number {
-  @apply text-2xl tracking-widest;
-}
+  .list-users {
+    @apply space-y-4;
+  }
 
-.bank-card-bottom {
-  @apply flex items-center justify-between;
+  .home-aside .user-info {
+    @apply text-white;
+  }
+
+  .bank-card {
+    @apply h-[180px] w-[310px] rounded-xl p-4 text-white shadow-lg;
+    background-image: url("../assets/images/card-bg.png");
+  }
+
+  .balance-title {
+    @apply text-2xl font-bold;
+  }
+
+  .card-number-container {
+    @apply my-2;
+  }
+
+  .card-number {
+    @apply text-2xl tracking-widest;
+  }
+
+  .bank-card-bottom {
+    @apply flex items-center justify-between;
+  }
+  /* #endregion */
 }
-/* #endregion */

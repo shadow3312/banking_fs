@@ -91,4 +91,9 @@ interface BankCardProps {
   balance: string;
 }
 
+interface UserInfoProps {
+  user: IUser;
+  truncate?: boolean;
+}
+
 type AuthType = "login" | "register";
