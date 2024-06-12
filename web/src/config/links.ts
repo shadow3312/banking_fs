@@ -15,16 +15,16 @@ const navLinks: NavLinks = {
         }),
     },
     {
-      title: "Transfer funds",
-      mobileTitle: "Transfer",
-      href: "/transfer",
+      title: "Send money",
+      mobileTitle: "Send",
+      href: "/send",
       icon: (isActive: boolean) =>
         Icons.fundsOut({
           className: cn(className, isActive && "nav-icon-active"),
         }),
     },
     {
-      title: "Transactions history",
+      title: "History",
       mobileTitle: "History",
       href: "/history",
       icon: (isActive: boolean) =>

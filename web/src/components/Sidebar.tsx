@@ -1,7 +1,7 @@
 "use client";
 
 import { navLinks } from "@/config/links";
-import { cn, truncateText } from "@/lib/utils";
+import { cn, getInitials, truncateText } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -45,7 +45,7 @@ export default function Sidebar({ user }: NavProps) {
         })}
       </div>
       <div className="sidebar-bottom">
-        <UserAvatar />
+        <UserAvatar fallback={getInitials([user.firstName, user.lastName])} />
         <div className="flex flex-col justify-between">
           <p>
             {user.firstName} {user.lastName}

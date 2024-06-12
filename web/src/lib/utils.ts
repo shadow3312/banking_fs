@@ -29,3 +29,39 @@ export const truncateText = (text: string, maxChars: number) => {
   }
   return "";
 };
+
+function generateMask(num: number): string {
+  let mask = "";
+  Array(num)
+    .fill(num)
+    .map((val: number, index: number) => {
+      mask += "*";
+      if (index !== 0 && (index + 1) % 4 === 0) {
+        mask += " ";
+      }
+    });
+  return mask;
+}
+
+export function displayCardNumber(num: number = 9, mask: string) {
+  const hidden = generateMask(num);
+  const cardNumber = hidden + " " + mask;
+  return cardNumber;
+}
+
+export const getInitials = (strings: string[]): string => {
+  const res = strings
+    .map((str) => (str && str.length > 0 ? str.slice(0, 1) : "").toUpperCase())
+    .join("");
+  return res;
+};
+
+export function formatAmount(amount: string, currency?: string): string {
+  currency = "USD";
+  const formated = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency,
+  }).format(parseFloat(amount));
+
+  return formated;
+}

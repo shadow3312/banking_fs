@@ -86,4 +86,9 @@ interface UserAvatarProps {
   fallback?: string;
 }
 
+interface BankCardProps {
+  mask: string;
+  balance: string;
+}
+
 type AuthType = "login" | "register";

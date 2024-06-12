@@ -1,7 +1,7 @@
 "use client";
 
 import { navLinks } from "@/config/links";
-import { cn } from "@/lib/utils";
+import { cn, getInitials } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -10,9 +10,14 @@ import UserAvatar from "./UserAvatar";
 import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { signOut } from "next-auth/react";
 
 export default function MobileNav({ user }: NavProps) {
   const pathname = usePathname();
+
+  async function handleLogout() {
+    await signOut();
+  }
   return (
     <div className="mobile-nav-wrapper">
       <div className="mobile-nav">
@@ -36,7 +41,9 @@ export default function MobileNav({ user }: NavProps) {
           })}
           <Popover>
             <PopoverTrigger>
-              <UserAvatar />
+              <UserAvatar
+                fallback={getInitials([user.firstName, user.lastName])}
+              />
             </PopoverTrigger>
             <PopoverContent className="mr-4 w-64">
               <div className="mb-4">
@@ -49,7 +56,7 @@ export default function MobileNav({ user }: NavProps) {
                 <p className="text-sm">{user.email}</p>
               </div>
 
-              <Button className="rounded-button">
+              <Button onClick={() => handleLogout()} className="rounded-button">
                 Logout <LogOut className="ml-4 h-5 w-5" />
               </Button>
             </PopoverContent>

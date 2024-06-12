@@ -114,9 +114,12 @@
 
   /* #endregion */
 
+  /* #region LAYOUT */
   .main-wrapper {
     @apply ml-auto mr-auto  h-screen w-auto flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-0 lg:grid-cols-[280px_minmax(0,1fr)];
   }
+
+  /* #endregion */
 
   /* #region NAV */
 
@@ -148,7 +151,7 @@
   }
 
   .nav-link {
-    @apply flex flex-col items-center md:flex-row md:gap-4;
+    @apply flex w-full flex-col items-center  md:flex-row md:gap-4;
   }
   .nav-link.active {
     @apply border-r-2 border-primary dark:border-gray-600;
@@ -158,7 +161,7 @@
     @apply h-2 w-2 rounded-full bg-primary dark:bg-white;
   }
   .mobile-nav-wrapper {
-    @apply fixed bottom-4 left-0 z-40 w-full md:hidden;
+    @apply fixed bottom-6 left-0 z-40 w-full md:hidden;
   }
 
   .mobile-nav {
@@ -170,6 +173,11 @@
   }
   /* #endregion */
 
+  /* #region COMMON */
+
+  .title {
+    @apply text-xl;
+  }
   .elevate {
     @apply shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)];
   }
@@ -195,3 +203,50 @@
     @apply !text-gray-400;
   }
 }
+
+/* #endregion */
+
+/* #region MAIN SLOT LAYOUT */
+.main {
+  @apply h-screen p-4 md:p-8;
+}
+/* #enregion */
+
+/* #region HOME PAGE */
+.home-page {
+  @apply h-full grid-cols-3 md:grid;
+}
+
+.home-main {
+  @apply col-span-2;
+}
+
+.home-aside {
+  @apply col-span-1 h-full w-full space-y-4 rounded-2xl bg-primary p-4;
+}
+
+.home-aside .title {
+  @apply text-white;
+}
+
+.bank-card {
+  @apply h-[180px] w-[310px] rounded-xl p-4 text-white shadow-lg;
+  background-image: url("../assets/images/card-bg.png");
+}
+
+.balance-title {
+  @apply text-2xl font-bold;
+}
+
+.card-number-container {
+  @apply my-2;
+}
+
+.card-number {
+  @apply text-2xl tracking-widest;
+}
+
+.bank-card-bottom {
+  @apply flex items-center justify-between;
+}
+/* #endregion */

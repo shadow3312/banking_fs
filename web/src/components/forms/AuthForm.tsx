@@ -77,6 +77,7 @@ export default function AuthForm({ type }: AuthFormProps) {
           toast({
             title: "Error",
             description: "Invalid credentials",
+            variant: "destructive",
           });
         } else {
           setIsLoading(false);
