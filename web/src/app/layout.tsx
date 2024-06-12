@@ -8,6 +8,7 @@ import { CookiesProvider } from "next-client-cookies/server";
 import { Toaster } from "@/components/ui/toaster";
 import { getServerAuthSession } from "@/server/auth";
 import Provider from "@/providers/SessionProvider";
+import RecoilContextProvider from "@/providers/RecoilProvider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -29,14 +30,20 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${fontSans.className}`}>
-        <Provider session={session}>
-          <CookiesProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              {children}
-              <Toaster />
-            </ThemeProvider>
-          </CookiesProvider>
-        </Provider>
+        <RecoilContextProvider>
+          <Provider session={session}>
+            <CookiesProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+              >
+                {children}
+                <Toaster />
+              </ThemeProvider>
+            </CookiesProvider>
+          </Provider>
+        </RecoilContextProvider>
       </body>
     </html>
   );

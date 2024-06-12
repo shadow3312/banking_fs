@@ -1,10 +1,20 @@
-import { displayCardNumber, formatAmount } from "@/lib/utils";
+import { cn, displayCardNumber, formatAmount } from "@/lib/utils";
 import React from "react";
 import { Icons } from "./Icons";
 
-export default function BankCard({ mask, balance }: BankCardProps) {
+export default function BankCard({
+  mask,
+  balance,
+  type,
+  account_name,
+}: BankCardProps) {
   return (
-    <div className="bank-card">
+    <div
+      className={cn(
+        "bank-card",
+        type === "debit" ? "bg-debit-card" : "bg-credit-card",
+      )}
+    >
       <div className="balance">
         <h4 className="text-gray-200">Balance</h4>
         <h3 className="balance-title">{formatAmount(balance)}</h3>
@@ -14,7 +24,7 @@ export default function BankCard({ mask, balance }: BankCardProps) {
       </div>
       <div className="bank-card-bottom">
         <div>
-          <h4>Joe Macklemore</h4>
+          <h4>{account_name}</h4>
         </div>
         {Icons.bankLogo({ className: "w-16 h-16 text-white" })}
       </div>

@@ -89,11 +89,29 @@ interface UserAvatarProps {
 interface BankCardProps {
   mask: string;
   balance: string;
+  type?: string;
+  account_name: string;
 }
 
 interface UserInfoProps {
   user: IUser;
   truncate?: boolean;
+}
+
+interface BankInfo {
+  id: string;
+  balance: string;
+  account_name: string;
+  mask: string;
+  type: string;
+}
+
+interface HomeAsideProps {
+  banks: BankInfo[];
+}
+
+interface BankCardStackProps {
+  banks: BankInfo[];
 }
 
 type AuthType = "login" | "register";
