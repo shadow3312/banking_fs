@@ -114,4 +114,22 @@ interface BankCardStackProps {
   banks: BankInfo[];
 }
 
+interface IExchangePublicToken {
+  publicToken: string;
+  user: IUser;
+}
+
+interface IAddFundingSource {
+  dwollaCustomerId: string;
+  processorToken: string;
+  bankName: string;
+}
+
+interface IFundingSourceOptions {
+  customerId: string;
+  fundingSourceName: string;
+  plaidToken: string;
+  _links: string;
+}
+
 type AuthType = "login" | "register";

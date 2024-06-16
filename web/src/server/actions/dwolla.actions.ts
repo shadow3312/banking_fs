@@ -33,3 +33,47 @@ export const createDwollaCustomer = async (customer: IDwollaCustomer) => {
     console.log(`Failed to create dwolla customer ${error}`);
   }
 };
+
+export async function createOnDemandAuthorization() {
+  try {
+    const authorization = await dwolla.post("on-demand-authorizations");
+    const authLink = authorization.body._links;
+
+    return authLink;
+  } catch (error) {
+    console.log(`Failed to create on demand authorization ${error}`);
+  }
+}
+
+export async function createFundingSource(options: IFundingSourceOptions) {
+  try {
+    return await dwolla
+      .post(`/customers/${options.customerId}/funding-sources`, {
+        name: options.fundingSourceName,
+        plaidToken: options.plaidToken,
+      })
+      .then((res) => res.headers.get("location"));
+  } catch (error) {
+    console.log(`Failed to create funding source ${error}`);
+  }
+}
+
+export async function addFundingSource({
+  dwollaCustomerId,
+  processorToken,
+  bankName,
+}: IAddFundingSource) {
+  try {
+    const authLinks = await createOnDemandAuthorization();
+
+    const fundingSourceOptions = {
+      customerId: dwollaCustomerId,
+      fundingSourceName: bankName,
+      plaidToken: processorToken,
+      _links: authLinks,
+    };
+    return await createFundingSource(fundingSourceOptions);
+  } catch (err) {
+    console.error("Transfer fund failed: ", err);
+  }
+}

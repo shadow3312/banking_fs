@@ -214,18 +214,24 @@
 
   /* #region MAIN SLOT LAYOUT */
   .main {
-    @apply h-screen p-4 md:p-8;
+    @apply h-screen p-4 md:p-4;
   }
-  /* #enregion */
+  /* #endregion */
 
   /* #region HOME PAGE */
   .home-page {
-    @apply mb-24 h-full grid-cols-3 md:grid;
+    @apply mb-24 h-full grid-cols-3 gap-4 gap-y-4 md:grid;
   }
 
   .home-main {
-    @apply col-span-2;
+    @apply col-span-2 mb-4 md:mb-0;
   }
+
+  .home-header {
+    @apply h-auto w-full rounded-xl border p-4;
+  }
+
+  /* #region ASIDE */
 
   .home-aside {
     @apply col-span-1 h-full w-full  rounded-2xl bg-primary p-4;
@@ -276,5 +282,8 @@
   .bank-card-bottom {
     @apply flex items-center justify-between;
   }
+
+  /* #endregion */
+
   /* #endregion */
 }

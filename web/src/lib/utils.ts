@@ -72,3 +72,11 @@ export const move = <T>(array: T[], from: number, to: number): T[] => {
   movedItem && newArray.splice(to, 0, movedItem);
   return newArray;
 };
+
+export const encryptId = (id: string) => {
+  return atob(id);
+};
+
+export const decryptId = (id: string) => {
+  return btoa(id);
+};

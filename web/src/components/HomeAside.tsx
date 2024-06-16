@@ -16,7 +16,7 @@ export default async function HomeAside({ banks }: HomeAsideProps) {
     <div className="home-aside">
       <div className="mb-8 flex items-center justify-between">
         <h3 className="title">My Banks</h3>
-        <PlaidLink />
+        {user && <PlaidLink user={user} />}
       </div>
       <BankCardStack banks={banks} />
 
