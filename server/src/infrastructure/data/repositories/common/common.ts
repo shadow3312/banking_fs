@@ -39,6 +39,17 @@ export default function buildMakeRepository({ models }: IBuildMakeRepository) {
       }
     }
 
+    async function findByUserId(userId: string) {
+      try {
+        const instances = await model.findAll({ where: { userId } });
+
+        const data = instances.map((instance: any) => instance.toJSON());
+        return data;
+      } catch (error) {
+        throw new Error(`Failed to find ${verboseName} by userId`);
+      }
+    }
+
     async function create(data: T) {
       try {
         const instance = await model.create(data);
@@ -78,6 +89,7 @@ export default function buildMakeRepository({ models }: IBuildMakeRepository) {
       findAll,
       findById,
       findByEmail,
+      findByUserId,
       create,
       update,
       remove,

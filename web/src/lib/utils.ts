@@ -56,12 +56,12 @@ export const getInitials = (strings: string[]): string => {
   return res;
 };
 
-export function formatAmount(amount: string, currency?: string): string {
+export function formatAmount(amount: number, currency?: string): string {
   currency = "USD";
   const formated = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: currency,
-  }).format(parseFloat(amount));
+  }).format(parseFloat(amount.toString()));
 
   return formated;
 }
@@ -74,9 +74,9 @@ export const move = <T>(array: T[], from: number, to: number): T[] => {
 };
 
 export const encryptId = (id: string) => {
-  return atob(id);
+  return btoa(id);
 };
 
 export const decryptId = (id: string) => {
-  return btoa(id);
+  return atob(id);
 };

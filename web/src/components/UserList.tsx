@@ -15,7 +15,7 @@ export default function UserList({ user }: { user: IUser | undefined }) {
         <h3 className="subtitle">
           From{" "}
           <span className="font-semibold text-green-500">
-            {selectedBank?.account_name}
+            {user?.firstName} {user?.lastName}
           </span>
           {" - "}
           <span>{selectedBank?.mask}</span>

@@ -7,7 +7,12 @@ import {
   PlaidLinkOnExit,
   PlaidLinkOptions,
 } from "react-plaid-link";
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  startTransition,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { Button } from "./ui/button";
 import { PlusCircle } from "lucide-react";
 import {
@@ -15,9 +20,19 @@ import {
   exchangePublicToken,
 } from "@/server/actions/auth.actions";
 import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { firstLaunchAtom } from "@/state/atom";
+import { toast } from "./ui/use-toast";
 
-export default function PlaidLink({ user }: { user: IUser }) {
+interface Props {
+  user: IUser;
+  large?: boolean;
+}
+
+export default function PlaidLink({ user, large = false }: Props) {
   const [token, setToken] = useState<string | null>("");
+  const [isFirstLaunch, setIsFirstLaunch] = useRecoilState(firstLaunchAtom);
+  const [isShowToast, setIsShowToast] = useState(false);
 
   const router = useRouter();
 
@@ -32,12 +47,23 @@ export default function PlaidLink({ user }: { user: IUser }) {
   const onSuccess = useCallback<PlaidLinkOnSuccess>(
     // After getting a publicToken, exchange it for an access token
     async (publicToken: string) => {
+      toast({
+        title: "Hold on",
+        description: "We're adding your bank account",
+      });
+
       await exchangePublicToken({
         publicToken,
         user,
       });
 
-      router.push("/");
+      startTransition(() => {
+        toast({
+          title: "Success",
+          description: "Your bank has been added successfuly",
+        });
+        router.refresh();
+      });
     },
     [user],
   );
@@ -45,6 +71,11 @@ export default function PlaidLink({ user }: { user: IUser }) {
   const onExit = useCallback<PlaidLinkOnExit>((error, metadata) => {
     console.log(error, metadata);
   }, []);
+
+  const handleOpen = () => {
+    setIsFirstLaunch(false);
+    open();
+  };
 
   useEffect(() => {
     getLinkToken();
@@ -58,8 +89,10 @@ export default function PlaidLink({ user }: { user: IUser }) {
 
   const { open, ready } = usePlaidLink(config);
 
-  return (
-    <Button size={"icon"} onClick={() => open()}>
+  return large ? (
+    <Button onClick={() => handleOpen()}>Connect bank</Button>
+  ) : (
+    <Button size={"icon"} onClick={() => handleOpen()}>
       <PlusCircle />
     </Button>
   );

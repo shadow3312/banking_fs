@@ -3,7 +3,12 @@ import { authMiddleware, publicProcedure, router } from "./trpc";
 import { z } from "zod";
 import { bankSchema, loginSchema, registerSchema } from "./schemas";
 import authenticateUser from "@/application/usecases/authentication";
-import { addBank, getBank, listBanks } from "@/application/usecases/bank";
+import {
+  addBank,
+  getBank,
+  getBanksByUser,
+  listBanks,
+} from "@/application/usecases/bank";
 
 const protectedProcedure = publicProcedure.use(authMiddleware);
 
@@ -32,6 +37,13 @@ const bankRouter = router({
     const bank = await getBank(input);
 
     return bank as IBank;
+  }),
+  getByUserId: publicProcedure.input(z.string()).query(async (opts) => {
+    const { input } = opts;
+
+    const bank = await getBanksByUser(input);
+
+    return bank as IBank[];
   }),
   create: publicProcedure.input(bankSchema).mutation(async (opts) => {
     const { input } = opts;

@@ -16,13 +16,13 @@ import Spinner from "../Spinner";
 import { useRouter } from "next/navigation";
 import { isObjectClean } from "@/lib/utils";
 import { registerUser } from "@/server/actions/auth.actions";
-import { useCookies } from "next-client-cookies";
-
 import { faker } from "@faker-js/faker";
+import { useRecoilState } from "recoil";
+import { firstLaunchAtom } from "@/state/atom";
 
 export default function AuthForm({ type }: AuthFormProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const cookies = useCookies();
+  const [isFirstLaunch, setIsFirstLaunch] = useRecoilState(firstLaunchAtom);
 
   const router = useRouter();
 
@@ -103,7 +103,7 @@ export default function AuthForm({ type }: AuthFormProps) {
               callbackUrl: "/",
             });
 
-            cookies.set("justRegistered", "true");
+            setIsFirstLaunch(true);
           }
         }
       }

@@ -13,6 +13,7 @@ import {
   Products,
 } from "plaid";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function registerUser(userPayload: IRegisterPayload) {
   try {
@@ -90,6 +91,7 @@ export async function exchangePublicToken({
 
     if (accountData) {
       const accountId = accountData.account_id;
+      const encodedId = encryptId(accountId);
 
       // Create a processor token for dwolla with the account id
 
@@ -116,21 +118,21 @@ export async function exchangePublicToken({
         throw new Error(`Failed to create a funding source`);
 
       // Next, create a bank account
-      await api.banks.create.mutate({
+      const bank = await api.banks.create.mutate({
         accessToken,
         fundingSourceUrl,
         accountId: accountId,
-        publicId: encryptId(accountId),
+        publicId: encodedId,
         userId: user.id,
       });
 
       revalidatePath("/");
 
       return {
-        publicTokenExchange: "complete",
+        publicTokenExchange: "done",
       };
     }
   } catch (error) {
-    console.log(`Error while exchanging public token`);
+    console.log(`Error while exchanging public token ${error}`);
   }
 }

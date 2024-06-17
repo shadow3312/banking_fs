@@ -1,6 +1,7 @@
 import { cn, displayCardNumber, formatAmount } from "@/lib/utils";
 import React from "react";
 import { Icons } from "./Icons";
+import { Badge } from "./ui/badge";
 
 export default function BankCard({
   mask,
@@ -12,7 +13,7 @@ export default function BankCard({
     <div
       className={cn(
         "bank-card",
-        type === "debit" ? "bg-debit-card" : "bg-credit-card",
+        mask === "1111" ? "bg-debit-card" : "bg-credit-card",
       )}
     >
       <div className="balance">
@@ -23,8 +24,10 @@ export default function BankCard({
         <CardNumber num={12} mask={mask} />
       </div>
       <div className="bank-card-bottom">
-        <div>
+        <div className="flex gap-2">
           <h4>{account_name}</h4>
+          <h4></h4>
+          <Badge variant="secondary">{type}</Badge>
         </div>
         {Icons.bankLogo({ className: "w-16 h-16 text-white" })}
       </div>

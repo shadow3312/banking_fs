@@ -13,17 +13,19 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { useSession } from "next-auth/react";
+import PlaidLink from "./PlaidLink";
+import { useRecoilState } from "recoil";
+import { firstLaunchAtom } from "@/state/atom";
 
 export default function Welcome() {
   const [open, setOpen] = useState(false);
+  const [isFirstLaunch, setIsFirstLaunch] = useRecoilState(firstLaunchAtom);
   const { data: session } = useSession();
   const user = session?.user.user;
-  const cookies = useCookies();
-  const justRegistered = cookies.get("justRegistered");
 
   useEffect(() => {
-    setOpen(justRegistered === "true");
-  }, [justRegistered]);
+    setOpen(isFirstLaunch);
+  }, [isFirstLaunch]);
   return (
     <Dialog open={open}>
       <DialogContent className="sm:max-w-[425px]">
@@ -39,10 +41,10 @@ export default function Welcome() {
           </p>
         </div>
         <DialogFooter className="sm:justify-start">
-          <Button>Connect bank</Button>
+          {user && <PlaidLink large user={user} />}
           <DialogClose asChild>
             <Button
-              onClick={() => cookies.remove("justRegistered")}
+              onClick={() => setIsFirstLaunch(false)}
               type="button"
               variant="secondary"
             >

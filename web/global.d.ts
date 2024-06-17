@@ -88,7 +88,7 @@ interface UserAvatarProps {
 
 interface BankCardProps {
   mask: string;
-  balance: string;
+  balance: number;
   type?: string;
   account_name: string;
 }
@@ -100,18 +100,24 @@ interface UserInfoProps {
 
 interface BankInfo {
   id: string;
-  balance: string;
-  account_name: string;
+  bankId: string;
+  bankInstitutionId: string;
+  publicId: string;
+  currentBalance: number;
   mask: string;
+  name: string;
+  officialName: string;
   type: string;
+  subtype: string;
 }
 
 interface HomeAsideProps {
-  banks: BankInfo[];
+  banks: BankInfo[] | undefined;
 }
 
 interface BankCardStackProps {
   banks: BankInfo[];
+  user: IUser;
 }
 
 interface IExchangePublicToken {
