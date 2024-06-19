@@ -21,7 +21,7 @@ import {
 } from "@/server/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
-import { firstLaunchAtom } from "@/state/atom";
+import { firstLaunchAtom, loadingActivityAtom } from "@/state/atom";
 import { toast } from "./ui/use-toast";
 
 interface Props {
@@ -32,7 +32,8 @@ interface Props {
 export default function PlaidLink({ user, large = false }: Props) {
   const [token, setToken] = useState<string | null>("");
   const [isFirstLaunch, setIsFirstLaunch] = useRecoilState(firstLaunchAtom);
-  const [isShowToast, setIsShowToast] = useState(false);
+  const [loadingActivity, setLoadingActivity] =
+    useRecoilState(loadingActivityAtom);
 
   const router = useRouter();
 
@@ -51,6 +52,10 @@ export default function PlaidLink({ user, large = false }: Props) {
         title: "Hold on",
         description: "We're adding your bank account",
       });
+      setLoadingActivity({
+        component: "BankCard",
+        isLoading: true,
+      });
 
       await exchangePublicToken({
         publicToken,
@@ -58,11 +63,15 @@ export default function PlaidLink({ user, large = false }: Props) {
       });
 
       startTransition(() => {
+        router.refresh();
+        setLoadingActivity({
+          component: "BankCard",
+          isLoading: false,
+        });
         toast({
           title: "Success",
           description: "Your bank has been added successfuly",
         });
-        router.refresh();
       });
     },
     [user],

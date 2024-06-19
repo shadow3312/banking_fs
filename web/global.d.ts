@@ -125,6 +125,10 @@ interface IExchangePublicToken {
   user: IUser;
 }
 
+interface ILoadingActivity {
+  isLoading: boolean;
+  component: string;
+}
 interface IAddFundingSource {
   dwollaCustomerId: string;
   processorToken: string;

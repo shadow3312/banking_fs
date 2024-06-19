@@ -14,4 +14,12 @@ const firstLaunchAtom = atom<boolean>({
   effects_UNSTABLE: [persistAtom],
 });
 
-export { selectedBankAtom, firstLaunchAtom };
+const loadingActivityAtom = atom<ILoadingActivity>({
+  key: "loadingActivity",
+  default: {
+    isLoading: false,
+    component: "none",
+  },
+});
+
+export { selectedBankAtom, firstLaunchAtom, loadingActivityAtom };

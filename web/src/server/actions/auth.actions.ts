@@ -101,6 +101,11 @@ export async function exchangePublicToken({
         processor: "dwolla" as ProcessorTokenCreateRequestProcessorEnum,
       };
 
+      // plaidClient
+      //   .processorTokenCreate(request)
+      //   .then((res) => console.log("succ", res))
+      //   .catch((err) => console.log("err", err));
+
       const processorTokenResponse =
         await plaidClient.processorTokenCreate(request);
 
