@@ -259,7 +259,7 @@
   }
 
   .home-aside .user-info {
-    @apply text-white;
+    @apply cursor-pointer text-white;
   }
 
   .bank-card {

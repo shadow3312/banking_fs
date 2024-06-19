@@ -6,6 +6,7 @@ import makeListUsersUseCase from "./list";
 import makeEditUserUseCase from "./edit";
 import makeRemoveUserUseCase from "./remove";
 import PasswordProvider from "@/infrastructure/providers/passwordHasher";
+import makeGetUserByEmailUseCase from "./getByEmail";
 
 const passwordProvider = PasswordProvider();
 
@@ -24,6 +25,10 @@ const getUser = makeGetUserUseCase({
   repository: userRepository,
 });
 
+const getUserByEmail = makeGetUserByEmailUseCase({
+  repository: userRepository,
+});
+
 const listUsers = makeListUsersUseCase({
   repository: userRepository,
 });
@@ -38,8 +43,9 @@ const userUseCases = Object.freeze({
   getUser,
   editUser,
   removeUser,
+  getUserByEmail,
 });
 
-export { addUser, getUser, listUsers, editUser, removeUser };
+export { addUser, getUser, listUsers, editUser, removeUser, getUserByEmail };
 
 export default userUseCases;

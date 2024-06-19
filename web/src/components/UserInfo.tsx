@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import {
   Tooltip,
   TooltipContent,
@@ -8,9 +10,13 @@ import {
 import UserAvatar from "./UserAvatar";
 import { getInitials, truncateText } from "@/lib/utils";
 
-export default function UserInfo({ user, truncate = false }: UserInfoProps) {
+export default function UserInfo({
+  user,
+  onClick,
+  truncate = false,
+}: UserInfoProps) {
   return (
-    <div className="user-info">
+    <div onClick={onClick} className="user-info">
       <UserAvatar fallback={getInitials([user.firstName, user.lastName])} />
       <div className="flex flex-col justify-between">
         <p>

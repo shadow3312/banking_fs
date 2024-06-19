@@ -11,6 +11,15 @@ export async function getUserBanks({ userId }: { userId: string }) {
   }
 }
 
+export async function getUserByEmail(email: string) {
+  try {
+    const user = await api.users.getByEmail.query(email);
+    return user;
+  } catch (error) {
+    console.log(`Failed to get user by email ${error}`);
+  }
+}
+
 export async function getBank({ id }: { id: string }) {
   try {
     const banks = await api.banks.getById.query(id);

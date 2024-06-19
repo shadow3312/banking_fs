@@ -1,4 +1,9 @@
-import { addUser, getUser, listUsers } from "@/application/usecases/user";
+import {
+  addUser,
+  getUser,
+  getUserByEmail,
+  listUsers,
+} from "@/application/usecases/user";
 import { authMiddleware, publicProcedure, router } from "./trpc";
 import { z } from "zod";
 import { bankSchema, loginSchema, registerSchema } from "./schemas";
@@ -21,6 +26,13 @@ const userRouter = router({
     const { input } = opts;
 
     const user = await getUser(input);
+
+    return user as IUser;
+  }),
+  getByEmail: publicProcedure.input(z.string()).query(async (opts) => {
+    const { input } = opts;
+
+    const user = await getUserByEmail(input);
 
     return user as IUser;
   }),

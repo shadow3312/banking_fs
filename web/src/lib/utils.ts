@@ -80,3 +80,18 @@ export const encryptId = (id: string) => {
 export const decryptId = (id: string) => {
   return atob(id);
 };
+
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Check email format
+  if (!emailRegex.test(email)) {
+    return false;
+  }
+
+  return true;
+}
+
+export const validateEmail = Object.freeze({
+  isValidEmail: (email: string) => isValidEmail(email),
+});

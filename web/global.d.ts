@@ -96,6 +96,7 @@ interface BankCardProps {
 interface UserInfoProps {
   user: IUser;
   truncate?: boolean;
+  onClick?: () => void;
 }
 
 interface BankInfo {
