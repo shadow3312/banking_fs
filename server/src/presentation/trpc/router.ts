@@ -6,7 +6,12 @@ import {
 } from "@/application/usecases/user";
 import { authMiddleware, publicProcedure, router } from "./trpc";
 import { z } from "zod";
-import { bankSchema, loginSchema, registerSchema } from "./schemas";
+import {
+  bankSchema,
+  loginSchema,
+  registerSchema,
+  transactionSchema,
+} from "./schemas";
 import authenticateUser from "@/application/usecases/authentication";
 import {
   addBank,
@@ -14,6 +19,14 @@ import {
   getBanksByUser,
   listBanks,
 } from "@/application/usecases/bank";
+import {
+  addTransaction,
+  getTransaction,
+  getTransactionByBank,
+  getTransactionBySender,
+  getTransactionsByReceiver,
+  listTransactions,
+} from "@/application/usecases/transaction";
 
 const protectedProcedure = publicProcedure.use(authMiddleware);
 
@@ -50,7 +63,7 @@ const bankRouter = router({
 
     return bank as IBank;
   }),
-  getByUserId: publicProcedure.input(z.string()).query(async (opts) => {
+  getByUserId: protectedProcedure.input(z.string()).query(async (opts) => {
     const { input } = opts;
 
     const bank = await getBanksByUser(input);
@@ -82,10 +95,56 @@ const authRouter = router({
   }),
 });
 
+const transactionRouter = router({
+  getAll: protectedProcedure.query(async ({ ctx }) => {
+    const transactions = await listTransactions();
+    return transactions;
+  }),
+  getById: protectedProcedure.input(z.string()).query(async (opts) => {
+    const { input } = opts;
+
+    const transaction = await getTransaction(input);
+
+    return transaction as ITransaction;
+  }),
+  getByBankId: protectedProcedure.input(z.string()).query(async (opts) => {
+    const { input } = opts;
+
+    const transactions = await getTransactionByBank(input);
+
+    return transactions as ITransaction[];
+  }),
+  getBySenderBankId: protectedProcedure
+    .input(z.string())
+    .query(async (opts) => {
+      const { input } = opts;
+
+      const transactions = await getTransactionBySender(input);
+
+      return transactions as ITransaction[];
+    }),
+  getByReceiverBankId: protectedProcedure
+    .input(z.string())
+    .query(async (opts) => {
+      const { input } = opts;
+
+      const transactions = await getTransactionsByReceiver(input);
+
+      return transactions as ITransaction[];
+    }),
+  create: protectedProcedure.input(transactionSchema).mutation(async (opts) => {
+    const { input } = opts;
+
+    const transaction = await addTransaction(input);
+
+    return transaction as ITransaction;
+  }),
+});
 const appRouter = router({
   auth: authRouter,
   users: userRouter,
   banks: bankRouter,
+  transactions: transactionRouter,
 });
 
 export default appRouter;

@@ -55,7 +55,10 @@ export const authMiddleware = middleware(async ({ ctx, next }) => {
 
     ctx.user = decoded;
   } catch (error) {
-    throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid token" });
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Invalid token" + error,
+    });
   }
   return next();
 });

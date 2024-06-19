@@ -34,6 +34,7 @@ interface ITransaction {
   receiverId: string;
   senderBankId: string;
   receiverBankId: string;
+  createdAt: number;
 }
 
 interface ILoginReturn {

@@ -224,7 +224,7 @@
   }
 
   .home-main {
-    @apply col-span-2 mb-4 md:mb-0;
+    @apply col-span-2 mb-4 overflow-y-scroll md:mb-0;
   }
 
   .home-header {

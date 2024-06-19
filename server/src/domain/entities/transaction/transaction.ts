@@ -15,6 +15,7 @@ export default function buildMakeTransaction({
     receiverId,
     senderBankId,
     receiverBankId,
+    createdAt,
   }: Partial<ITransaction>) {
     //#region field validation
     if (!Id.isValidId(id)) {
@@ -62,6 +63,7 @@ export default function buildMakeTransaction({
       getReceiverId: () => receiverId,
       getSenderBankId: () => senderBankId,
       getReceiverBankId: () => receiverBankId,
+      getCreatedAt: () => createdAt,
     });
   };
 }

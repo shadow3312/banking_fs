@@ -12,5 +12,6 @@ export default function transactionToObject(
     receiverId: transaction.getReceiverId(),
     senderBankId: transaction.getSenderBankId(),
     receiverBankId: transaction.getReceiverBankId(),
+    createdAt: transaction.getCreatedAt(),
   });
 }

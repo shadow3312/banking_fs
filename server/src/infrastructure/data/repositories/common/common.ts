@@ -49,6 +49,38 @@ export default function buildMakeRepository({ models }: IBuildMakeRepository) {
         throw new Error(`Failed to find ${verboseName} by userId`);
       }
     }
+    async function findBySenderBankId(senderBankId: string) {
+      try {
+        const instances = await model.findAll({ where: { senderBankId } });
+
+        const data = instances.map((instance: any) => instance.toJSON());
+        return data;
+      } catch (error) {
+        throw new Error(`Failed to find ${verboseName} by senderBankId`);
+      }
+    }
+
+    async function findByReceiverBankId(receiverBankId: string) {
+      try {
+        const instances = await model.findAll({ where: { receiverBankId } });
+
+        const data = instances.map((instance: any) => instance.toJSON());
+        return data;
+      } catch (error) {
+        throw new Error(`Failed to find ${verboseName} by receiverBankId`);
+      }
+    }
+
+    async function findByBankId(bankId: string) {
+      try {
+        const instances = await model.findAll({ where: { bankId } });
+
+        const data = instances.map((instance: any) => instance.toJSON());
+        return data;
+      } catch (error) {
+        throw new Error(`Failed to find ${verboseName} by bankId`);
+      }
+    }
 
     async function create(data: T) {
       try {
@@ -90,6 +122,9 @@ export default function buildMakeRepository({ models }: IBuildMakeRepository) {
       findById,
       findByEmail,
       findByUserId,
+      findByBankId,
+      findBySenderBankId,
+      findByReceiverBankId,
       create,
       update,
       remove,

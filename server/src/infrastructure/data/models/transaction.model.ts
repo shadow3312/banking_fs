@@ -17,6 +17,7 @@ export class Transaction
   declare receiverId: string;
   declare senderBankId: string;
   declare receiverBankId: string;
+  declare createdAt: number;
 }
 
 export function initializeTransaction(
@@ -65,11 +66,14 @@ export function initializeTransaction(
         type: DataTypes.STRING,
         allowNull: false,
       },
+      createdAt: {
+        type: DataTypes.BIGINT,
+      },
     },
     {
       sequelize,
       tableName: "transactions",
-      timestamps: false,
+      timestamps: true,
     }
   );
 
