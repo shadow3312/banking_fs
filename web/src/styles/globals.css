@@ -104,6 +104,14 @@
     @apply mb-6;
   }
 
+  .form-item {
+    @apply space-y-2;
+  }
+
+  .form-label {
+    @apply !text-[16px];
+  }
+
   input.form-input {
     @apply rounded-lg border-none bg-slate-100 ring-0 focus:border-none focus:ring-0 dark:text-black;
   }
@@ -251,7 +259,7 @@
   }
 
   .list-users-wrapper {
-    @apply h-[300px] md:h-[150px];
+    @apply h-[300px] pb-6 md:h-[150px];
   }
 
   .list-users {
@@ -281,6 +289,21 @@
 
   .bank-card-bottom {
     @apply flex items-center justify-between;
+  }
+
+  .transfer-sheet-content {
+    @apply !w-screen md:w-full;
+  }
+  .transfer-form-wrapper {
+    @apply mt-6 w-full space-y-4;
+  }
+
+  .transfer-form-item {
+    @apply w-full;
+  }
+
+  .transfer-form-header {
+    @apply flex items-center justify-between rounded-xl bg-gray-500 p-4 dark:bg-slate-800;
   }
 
   /* #endregion */

@@ -56,7 +56,7 @@ export async function createLinkToken(user: IUser) {
         client_user_id: user.id,
       },
       client_name: `${user.firstName} ${user.lastName}`,
-      products: ["auth"] as Products[],
+      products: [Products.Auth],
       language: "en",
       country_codes: ["US"] as CountryCode[],
     };
@@ -98,7 +98,7 @@ export async function exchangePublicToken({
       const request: ProcessorTokenCreateRequest = {
         access_token: accessToken,
         account_id: accountId!,
-        processor: "dwolla" as ProcessorTokenCreateRequestProcessorEnum,
+        processor: ProcessorTokenCreateRequestProcessorEnum.Dwolla,
       };
 
       // plaidClient

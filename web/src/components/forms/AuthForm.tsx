@@ -53,7 +53,8 @@ export default function AuthForm({ type }: AuthFormProps) {
   }
 
   const formSchema = authFormSchema(type);
-  const form = useForm<z.infer<typeof formSchema>>({
+  type AuthFormSchemaType = z.infer<typeof formSchema>;
+  const form = useForm<AuthFormSchemaType>({
     resolver: zodResolver(formSchema),
   });
 

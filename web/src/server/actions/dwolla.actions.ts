@@ -77,3 +77,33 @@ export async function addFundingSource({
     console.error("Failed to add funding source: ", err);
   }
 }
+
+export async function initiateTransfer({
+  sourceFundingSourceUrl,
+  destinationFundingSourceUrl,
+  amount,
+}: IInitiateTransferOptions) {
+  try {
+    const requestBody = {
+      _links: {
+        source: {
+          href: sourceFundingSourceUrl,
+        },
+        destination: {
+          source: {
+            href: destinationFundingSourceUrl,
+          },
+        },
+      },
+      amount: {
+        currency: "USD",
+        value: amount,
+      },
+    };
+    const response = await dwolla.post(`transfers`, requestBody);
+
+    return response.headers.get("location");
+  } catch (error) {
+    console.log(`Failed to create dwolla transfer ${error}`);
+  }
+}

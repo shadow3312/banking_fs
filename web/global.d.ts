@@ -144,4 +144,10 @@ interface IFundingSourceOptions {
   _links: string;
 }
 
+interface IInitiateTransferOptions {
+  sourceFundingSourceUrl: string;
+  destinationFundingSourceUrl: string;
+  amount: number;
+}
+
 type AuthType = "login" | "register";

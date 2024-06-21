@@ -32,3 +32,16 @@ export const authFormSchema = (type: AuthType = "register") => {
             .trim(),
   });
 };
+
+export const transferFormSchema = z.object({
+  destinationFundingSource: z
+    .string()
+    .min(6, { message: "The public id must have at least 6 characters" }),
+  amount: z.coerce
+    .number()
+    .gte(10, { message: "The amount cannot be lower than 10 USD" }),
+  note: z
+    .string()
+    .min(4, { message: "Transfer not must have at least 4 characters" }),
+  email: z.string().email().trim(),
+});

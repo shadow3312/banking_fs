@@ -6,10 +6,9 @@ import { ScrollArea } from "./ui/scroll-area";
 import UserInfo from "./UserInfo";
 import { useRecoilValue } from "recoil";
 import { selectedBankAtom } from "@/state/atom";
-import { truncateText, validateEmail } from "@/lib/utils";
-import { toast } from "./ui/use-toast";
-import { api } from "@/trpc/server";
+import { cn, truncateText, validateEmail } from "@/lib/utils";
 import { getUserBanks, getUserByEmail } from "@/server/actions/user.actions";
+import TransferSheet from "./TransferSheet";
 
 export default function UserList() {
   const selectedBank = useRecoilValue(selectedBankAtom);
@@ -17,6 +16,8 @@ export default function UserList() {
   const [errorMessage, setErrorMessage] = useState("");
   const [user, setUser] = useState<IUser | undefined>();
   const [banks, setBanks] = useState<IBank[] | undefined>();
+  const [showTransferForm, setShowTransferForm] = useState(false);
+  const [destinationFundingSource, setDestinationFundingSource] = useState("");
 
   const handleClickUser = async () => {
     if (user) {
@@ -54,6 +55,11 @@ export default function UserList() {
       setErrorMessage("Enter a valid email");
     }
   };
+
+  const handleClickPublicId = (publicId: string) => {
+    setDestinationFundingSource(publicId);
+    setShowTransferForm(true);
+  };
   return (
     <div className="home-aside-bottom">
       <div className="mb-4">
@@ -82,11 +88,24 @@ export default function UserList() {
 
           {banks &&
             banks.map((bank: IBank, index: number) => (
-              <div className="flex cursor-pointer" key={bank.id}>
-                <p>
-                  Bank {index + 1}: {truncateText(bank.publicId, 24)}
-                </p>
-              </div>
+              <TransferSheet
+                destinationFundingSource={destinationFundingSource}
+                email={user?.email}
+              >
+                <div
+                  className={cn(
+                    destinationFundingSource === bank.publicId &&
+                      "bg-secondary",
+                    "flex cursor-pointer p-2",
+                  )}
+                  key={bank.id}
+                  onClick={() => handleClickPublicId(bank.publicId)}
+                >
+                  <p>
+                    Bank {index + 1}: {truncateText(bank.publicId, 24)}
+                  </p>
+                </div>
+              </TransferSheet>
             ))}
         </div>
         {errorMessage && (
