@@ -16,6 +16,7 @@ import authenticateUser from "@/application/usecases/authentication";
 import {
   addBank,
   getBank,
+  getBanksByAccount,
   getBanksByUser,
   listBanks,
 } from "@/application/usecases/bank";
@@ -56,7 +57,7 @@ const bankRouter = router({
     const banks = await listBanks();
     return banks;
   }),
-  getById: publicProcedure.input(z.string()).query(async (opts) => {
+  getById: protectedProcedure.input(z.string()).query(async (opts) => {
     const { input } = opts;
 
     const bank = await getBank(input);
@@ -70,7 +71,14 @@ const bankRouter = router({
 
     return bank as IBank[];
   }),
-  create: publicProcedure.input(bankSchema).mutation(async (opts) => {
+  getByAccountId: protectedProcedure.input(z.string()).query(async (opts) => {
+    const { input } = opts;
+
+    const bank = await getBanksByAccount(input);
+
+    return bank as IBank;
+  }),
+  create: protectedProcedure.input(bankSchema).mutation(async (opts) => {
     const { input } = opts;
 
     const bank = await addBank(input);

@@ -81,6 +81,15 @@ export default function buildMakeRepository({ models }: IBuildMakeRepository) {
         throw new Error(`Failed to find ${verboseName} by bankId`);
       }
     }
+    async function findByAccountId(accountId: string) {
+      try {
+        const instance = await model.findOne({ where: { accountId } });
+
+        return instance ? instance.toJSON() : null;
+      } catch (error) {
+        throw new Error(`Failed to find ${verboseName} by accountId`);
+      }
+    }
 
     async function create(data: T) {
       try {
@@ -125,6 +134,7 @@ export default function buildMakeRepository({ models }: IBuildMakeRepository) {
       findByBankId,
       findBySenderBankId,
       findByReceiverBankId,
+      findByAccountId,
       create,
       update,
       remove,

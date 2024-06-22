@@ -6,6 +6,7 @@ import makeEditBankUseCase from "./edit";
 import makeRemoveBankUseCase from "./remove";
 import bankToObject from "@/application/mappers/bank";
 import makeGetBanksByUserUseCase from "./getByUser";
+import makeGetBanksByAccountUseCase from "./getByAccount";
 
 const addBank = makeAddBankUseCase({
   repository: bankRepository,
@@ -33,15 +34,28 @@ const getBanksByUser = makeGetBanksByUserUseCase({
   repository: bankRepository,
 });
 
+const getBanksByAccount = makeGetBanksByAccountUseCase({
+  repository: bankRepository,
+});
+
 const bankUseCases = Object.freeze({
   addBank,
   listBanks,
   getBank,
   getBanksByUser,
+  getBanksByAccount,
   editBank,
   removeBank,
 });
 
-export { addBank, getBank, getBanksByUser, listBanks, editBank, removeBank };
+export {
+  addBank,
+  getBank,
+  getBanksByUser,
+  getBanksByAccount,
+  listBanks,
+  editBank,
+  removeBank,
+};
 
 export default bankUseCases;

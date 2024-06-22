@@ -6,6 +6,7 @@ interface IRepository<T> {
   findBySenderBankId: (senderBankId: string) => Promise<T[]>;
   findByReceiverBankId: (receiverBankId: string) => Promise<T[]>;
   findByUserId: (userId: string) => Promise<T[]>;
+  findByAccountId: (accountId: string) => Promise<T>;
   create: (data: T) => Promise<T>;
   update: (id: string, data: Partial<T>) => Promise<T>;
   remove: (id: string) => Promise<void>;
