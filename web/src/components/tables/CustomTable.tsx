@@ -27,15 +27,18 @@ import {
 
 import { TablePagination } from "./TablePagination";
 import { TableToolbar } from "./TableToolBar";
+import { cn } from "@/lib/utils";
 
 interface CustomTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  className?: string;
 }
 
 export function CustomTable<TData, TValue>({
   columns,
   data,
+  className,
 }: CustomTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -68,7 +71,7 @@ export function CustomTable<TData, TValue>({
   });
 
   return (
-    <div className="space-y-4">
+    <div className={cn("space-y-4", className)}>
       <TableToolbar table={table} />
       <div className="rounded-md border">
         <Table>

@@ -128,8 +128,7 @@ interface IExchangePublicToken {
 }
 
 interface ILoadingActivity {
-  isLoading: boolean;
-  component: string;
+  [key: string]: boolean;
 }
 interface IAddFundingSource {
   dwollaCustomerId: string;

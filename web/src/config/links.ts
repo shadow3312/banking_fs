@@ -15,15 +15,6 @@ const navLinks: NavLinks = {
         }),
     },
     {
-      title: "Send money",
-      mobileTitle: "Send",
-      href: "/send",
-      icon: (isActive: boolean) =>
-        Icons.fundsOut({
-          className: cn(className, isActive && "nav-icon-active"),
-        }),
-    },
-    {
       title: "History",
       mobileTitle: "History",
       href: "/history",
@@ -32,6 +23,15 @@ const navLinks: NavLinks = {
           className: cn(className, isActive && "nav-icon-active"),
         }),
     },
+    // {
+    //   title: "Send money",
+    //   mobileTitle: "Send",
+    //   href: "/send",
+    //   icon: (isActive: boolean) =>
+    //     Icons.fundsOut({
+    //       className: cn(className, isActive && "nav-icon-active"),
+    //     }),
+    // },
   ],
 };
 export { navLinks };

@@ -87,26 +87,28 @@ export default function UserList() {
           {user && <UserInfo user={user} onClick={handleClickUser} />}
 
           {banks &&
-            banks.map((bank: IBank, index: number) => (
-              <TransferSheet
-                destinationFundingSource={destinationFundingSource}
-                email={user?.email}
-              >
-                <div
-                  className={cn(
-                    destinationFundingSource === bank.publicId &&
-                      "bg-secondary",
-                    "flex cursor-pointer p-2",
-                  )}
-                  key={bank.id}
-                  onClick={() => handleClickPublicId(bank.publicId)}
+            banks
+              .filter((bank) => bank.publicId !== selectedBank?.publicId)
+              .map((bank: IBank, index: number) => (
+                <TransferSheet
+                  destinationFundingSource={destinationFundingSource}
+                  email={user?.email}
                 >
-                  <p>
-                    Bank {index + 1}: {truncateText(bank.publicId, 24)}
-                  </p>
-                </div>
-              </TransferSheet>
-            ))}
+                  <div
+                    className={cn(
+                      destinationFundingSource === bank.publicId &&
+                        "bg-secondary",
+                      "flex cursor-pointer p-2",
+                    )}
+                    key={bank.id}
+                    onClick={() => handleClickPublicId(bank.publicId)}
+                  >
+                    <p>
+                      Bank {index + 1}: {truncateText(bank.publicId, 24)}
+                    </p>
+                  </div>
+                </TransferSheet>
+              ))}
         </div>
         {errorMessage && (
           <p className="text-center font-semibold text-red-500">

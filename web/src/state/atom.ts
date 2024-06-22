@@ -16,10 +16,7 @@ const firstLaunchAtom = atom<boolean>({
 
 const loadingActivityAtom = atom<ILoadingActivity>({
   key: "loadingActivity",
-  default: {
-    isLoading: false,
-    component: "none",
-  },
+  default: {},
 });
 
 export { selectedBankAtom, firstLaunchAtom, loadingActivityAtom };

@@ -1,27 +1,36 @@
 "use client";
 
 import { getBankAccount, getBankAccounts } from "@/server/actions/bank.actions";
-import { selectedBankAtom } from "@/state/atom";
+import { loadingActivityAtom, selectedBankAtom } from "@/state/atom";
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Spinner from "./Spinner";
 import { useFetchTransaction } from "@/lib/hooks/useFetchTransactions";
 import TransactionsTable from "./TransactionsTable";
+import { useLoading } from "@/lib/hooks/useLoading";
 
 export default function LastTransactions({ user }: { user: IUser }) {
   const selectedBank = useRecoilValue(selectedBankAtom);
-  const [mounted, setMounted] = useState(false);
 
-  const { isLoading, transactions, fetchTransactions } =
-    useFetchTransaction(user);
+  const {
+    isLoading: loadingTransactions,
+    transactions,
+    fetchTransactions,
+  } = useFetchTransaction(user);
+  const [isLoading, setIsLoading] = useLoading("TransactionsTable");
 
   useEffect(() => {
-    fetchTransactions();
-  }, [selectedBank]);
+    if (selectedBank || isLoading) {
+      fetchTransactions();
+    }
+  }, [selectedBank, isLoading]);
 
   return (
     <div>
-      <TransactionsTable isLoading={isLoading} transactions={transactions} />
+      <TransactionsTable
+        isLoading={loadingTransactions}
+        transactions={transactions}
+      />
     </div>
   );
 }

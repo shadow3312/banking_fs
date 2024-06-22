@@ -8,8 +8,8 @@ import { transferFormSchema } from "@/lib/schemas";
 import { Form } from "@/components/ui/form";
 import { Button } from "../ui/button";
 import FormInput from "../FormInput";
-import { useRecoilValue } from "recoil";
-import { selectedBankAtom } from "@/state/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { loadingActivityAtom, selectedBankAtom } from "@/state/atom";
 import { decryptId, formatAmount } from "@/lib/utils";
 import { Icons } from "../Icons";
 import LargeButton from "../LargeButton";
@@ -20,9 +20,9 @@ import {
 import { getBank } from "@/server/actions/user.actions";
 import { initiateTransfer } from "@/server/actions/dwolla.actions";
 import { createTransaction } from "@/server/actions/transaction.actions";
-import { router } from "~/presentation/trpc/trpc";
 import { useRouter } from "next/navigation";
 import { toast } from "../ui/use-toast";
+import { useLoading } from "@/lib/hooks/useLoading";
 
 type TransferFormProps = {
   destinationFundingSource?: string;
@@ -33,9 +33,9 @@ export default function TransferForm({
   email,
 }: TransferFormProps) {
   const selectedBank = useRecoilValue(selectedBankAtom);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingTable, setLoadingTable] = useLoading("TransactionsTable");
   const form = useForm<z.infer<typeof transferFormSchema>>({
     resolver: zodResolver(transferFormSchema),
   });
@@ -81,10 +81,12 @@ export default function TransferForm({
             if (transaction) {
               setIsLoading(false);
               form.reset();
-              router.refresh();
+              setLoadingTable(true);
+
               toast({
                 title: "Sucess",
-                description: "Your transfer request has been sent successfuly",
+                description:
+                  "Your transfer request has been sent successfuly. It takes up to two days to complete.",
               });
             }
           }

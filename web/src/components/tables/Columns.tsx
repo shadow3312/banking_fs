@@ -91,12 +91,12 @@ export const columns: ColumnDef<TTransaction>[] = [
         <div className="flex w-[100px] items-center">
           <Badge
             className={cn(
-              "flex",
-              status.value === "success" ? "bg-green-600" : "bg-secondary",
+              "flex text-gray-800 dark:text-gray-800",
+              status.value === "success" ? "bg-green-600" : "bg-orange-500",
             )}
           >
             {status.icon && (
-              <status.icon className="mr-2 h-4 w-4  text-gray-300 dark:text-muted" />
+              <status.icon className="mr-2 h-4 w-4  text-muted" />
             )}
             {statusText}
           </Badge>
@@ -119,16 +119,11 @@ export const columns: ColumnDef<TTransaction>[] = [
       return (
         <div className="flex items-center">
           <Badge variant={"outline"}>{row.getValue("category")}</Badge>
-          <p>{row.getValue("type")}</p>
         </div>
       );
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
     },
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => <TableRowActions row={row} />,
   },
 ];

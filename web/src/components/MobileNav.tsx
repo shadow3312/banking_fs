@@ -11,6 +11,8 @@ import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import { signOut } from "next-auth/react";
+import TransferSheet from "./TransferSheet";
+import { Icons } from "./Icons";
 
 export default function MobileNav({ user }: NavProps) {
   const pathname = usePathname();
@@ -39,6 +41,16 @@ export default function MobileNav({ user }: NavProps) {
               </Link>
             );
           })}
+          <div className="nav-link">
+            <TransferSheet>
+              <div>
+                <div className={cn("nav-icon-wrapper")}>
+                  {Icons.fundsOut({})}
+                </div>
+                <span className={cn("nav-title")}>Send</span>
+              </div>
+            </TransferSheet>
+          </div>
           <Popover>
             <PopoverTrigger>
               <UserAvatar

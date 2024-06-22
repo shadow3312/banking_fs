@@ -48,7 +48,7 @@ export default function HomeHeader({ user }: { user: IUser }) {
 
       if (month >= 0 && month < 7) {
         if (transaction.amount > 0) {
-          monthlyIncomes[month] += transaction.amount;
+          monthlyIncomes[month] += Math.abs(transaction.amount);
         } else {
           monthlyOutcomes[month] += Math.abs(transaction.amount);
         }

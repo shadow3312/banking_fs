@@ -1,7 +1,8 @@
 import React from "react";
 import LoadingOverlay from "./LoadingOverlay";
-import { CustomTable } from "./tables/Table";
+import { CustomTable } from "./tables/CustomTable";
 import { columns } from "./tables/Columns";
+import { cn } from "@/lib/utils";
 
 interface TransactionTableProps {
   transactions: TTransaction[];
@@ -11,11 +12,14 @@ export default function TransactionsTable({
   transactions,
   isLoading = false,
 }: TransactionTableProps) {
-  console.log("transaction", transactions);
   return (
     <div className="relative">
       {isLoading && <LoadingOverlay />}
-      <CustomTable data={transactions} columns={columns} />
+      <CustomTable
+        className={cn(isLoading && "pointer-events-none opacity-40")}
+        data={transactions}
+        columns={columns}
+      />
     </div>
   );
 }

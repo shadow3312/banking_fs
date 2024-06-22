@@ -15,6 +15,8 @@ import {
 } from "./ui/tooltip";
 import UserAvatar from "./UserAvatar";
 import UserInfo from "./UserInfo";
+import TransferSheet from "./TransferSheet";
+import { Icons } from "./Icons";
 
 export default function Sidebar({ user }: NavProps) {
   const pathname = usePathname();
@@ -44,6 +46,12 @@ export default function Sidebar({ user }: NavProps) {
             </Link>
           );
         })}
+        <TransferSheet>
+          <div className="nav-link">
+            <div className={cn("nav-icon-wrapper")}>{Icons.fundsOut({})}</div>
+            <span className={cn("nav-title")}>Send money</span>
+          </div>
+        </TransferSheet>
       </div>
       <div className="sidebar-bottom">
         <UserInfo user={user} truncate />
