@@ -77,6 +77,7 @@ export const columns: ColumnDef<TTransaction>[] = [
   {
     id: "status",
     accessorFn: (row) => getTransactionStatus(new Date(row.createdAt)),
+    enableColumnFilter: true,
     header: ({ column }) => (
       <TableColumnHeader column={column} title="Status" />
     ),
@@ -103,7 +104,8 @@ export const columns: ColumnDef<TTransaction>[] = [
       );
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
+      const rowValue: string = row.getValue(id);
+      return value.includes(rowValue.toLowerCase());
     },
   },
   {
