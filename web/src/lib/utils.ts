@@ -95,3 +95,11 @@ function isValidEmail(email: string): boolean {
 export const validateEmail = Object.freeze({
   isValidEmail: (email: string) => isValidEmail(email),
 });
+
+export const getTransactionStatus = (date: Date) => {
+  const today = new Date();
+  const twoDaysAgo = new Date(today);
+  twoDaysAgo.setDate(today.getDate() - 2);
+
+  return date > twoDaysAgo ? "Processing" : "Success";
+};

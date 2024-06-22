@@ -10,9 +10,19 @@ import { Button } from "../ui/button";
 import FormInput from "../FormInput";
 import { useRecoilValue } from "recoil";
 import { selectedBankAtom } from "@/state/atom";
-import { formatAmount } from "@/lib/utils";
+import { decryptId, formatAmount } from "@/lib/utils";
 import { Icons } from "../Icons";
 import LargeButton from "../LargeButton";
+import {
+  getBankAccount,
+  getBankByAccount,
+} from "@/server/actions/bank.actions";
+import { getBank } from "@/server/actions/user.actions";
+import { initiateTransfer } from "@/server/actions/dwolla.actions";
+import { createTransaction } from "@/server/actions/transaction.actions";
+import { router } from "~/presentation/trpc/trpc";
+import { useRouter } from "next/navigation";
+import { toast } from "../ui/use-toast";
 
 type TransferFormProps = {
   destinationFundingSource?: string;
@@ -23,6 +33,8 @@ export default function TransferForm({
   email,
 }: TransferFormProps) {
   const selectedBank = useRecoilValue(selectedBankAtom);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof transferFormSchema>>({
     resolver: zodResolver(transferFormSchema),
@@ -36,7 +48,55 @@ export default function TransferForm({
   }, [email, destinationFundingSource]);
 
   const onSubmit = async (data: z.infer<typeof transferFormSchema>) => {
-    console.log("dt", data);
+    try {
+      if (selectedBank) {
+        setIsLoading(true);
+        const destinationAccountId = decryptId(data.destinationFundingSource);
+        const senderBank = await getBank({ id: selectedBank?.bankId });
+        const receiverBank = await getBankByAccount({
+          accountId: destinationAccountId,
+        });
+
+        if (senderBank && receiverBank) {
+          const transferPayload = {
+            sourceFundingSourceUrl: senderBank.fundingSourceUrl,
+            destinationFundingSourceUrl: receiverBank.fundingSourceUrl,
+            amount: data.amount,
+          };
+          const transfer = await initiateTransfer(transferPayload);
+
+          if (transfer) {
+            // Save the transaction in db
+            const transactionPayload: ITransactionCreate = {
+              name: data.note,
+              email: data.email,
+              amount: data.amount.toString(),
+              senderId: senderBank.userId,
+              senderBankId: senderBank.id,
+              receiverId: receiverBank.userId,
+              receiverBankId: receiverBank.id,
+            };
+            const transaction = await createTransaction(transactionPayload);
+
+            if (transaction) {
+              setIsLoading(false);
+              form.reset();
+              router.refresh();
+              toast({
+                title: "Sucess",
+                description: "Your transfer request has been sent successfuly",
+              });
+            }
+          }
+        }
+      }
+    } catch (error: any) {
+      setIsLoading(false);
+      toast({
+        title: "Error",
+        description: `${"message" in error ? error.message : error}`,
+      });
+    }
   };
   return (
     <div className="transfer-form-wrapper">
@@ -86,7 +146,7 @@ export default function TransferForm({
             label="Amount"
             placeholder="50"
           />
-          <LargeButton text="Send" />
+          <LargeButton isLoading={isLoading} text="Send" />
         </form>
       </Form>
     </div>

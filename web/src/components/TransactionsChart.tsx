@@ -12,6 +12,7 @@ import { Bar } from "react-chartjs-2";
 import { useRecoilValue } from "recoil";
 import { selectedBankAtom } from "@/state/atom";
 import Spinner from "./Spinner";
+import LoadingOverlay from "./LoadingOverlay";
 
 ChartJS.register(
   CategoryScale,
@@ -77,11 +78,7 @@ export default function TransactionsChart({
   };
   return (
     <div className="relative">
-      {isLoading && (
-        <div className="absolute left-0 grid h-full w-full place-items-center border bg-black/30 dark:bg-black/60">
-          <Spinner large />
-        </div>
-      )}
+      {isLoading && <LoadingOverlay />}
       <Bar options={options} data={data} />
     </div>
   );

@@ -5,22 +5,9 @@ import { selectedBankAtom } from "@/state/atom";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
-interface Transaction {
-  id: string;
-  name: string;
-  amount: number;
-  channel: string;
-  category: {
-    confidence_level: string;
-    detailed: string;
-    primary: string;
-  };
-  createdAt: string;
-}
-
 export function useFetchTransaction(user: IUser) {
   const [isLoading, setIsLoading] = useState(false);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [transactions, setTransactions] = useState<TTransaction[]>([]);
   const selectedBank = useRecoilValue(selectedBankAtom);
 
   const fetchTransactions = async () => {
@@ -35,7 +22,9 @@ export function useFetchTransaction(user: IUser) {
       const bankAccount = await getBankAccount({
         bankId: selectedBank?.bankId! || defaultBank?.bankId!,
       });
-      setTransactions(bankAccount?.transactions as Transaction[]);
+      if (bankAccount) {
+        setTransactions(bankAccount?.transactions as TTransaction[]);
+      }
       setIsLoading(false);
     }
   };

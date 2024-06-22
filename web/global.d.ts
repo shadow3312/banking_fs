@@ -34,7 +34,7 @@ interface ITransaction {
   receiverId: string;
   senderBankId: string;
   receiverBankId: string;
-  createdAt: number;
+  createdAt?: string;
 }
 
 interface ILoginReturn {
@@ -148,6 +148,21 @@ interface IInitiateTransferOptions {
   sourceFundingSourceUrl: string;
   destinationFundingSourceUrl: string;
   amount: number;
+}
+
+type ITransactionCreate = Omit<ITransaction, "id" | "channel" | "category">;
+
+interface TTransaction {
+  id: string;
+  name: string;
+  amount: number;
+  channel: string;
+  category: {
+    confidence_level: string;
+    detailed: string;
+    primary: string;
+  };
+  createdAt: string;
 }
 
 type AuthType = "login" | "register";

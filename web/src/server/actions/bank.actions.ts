@@ -88,10 +88,10 @@ export async function getBankAccount({ bankId }: { bankId: string }) {
 
     const accountData = accountsResponse.data.accounts[0];
 
-    // Get transfer transactions
-    const transferTransactionsData = await getTransactionsByBankId({ bankId });
+    // Get db transfer transactions
+    const dbTransactionsData = await getTransactionsByBankId({ bankId });
 
-    const transferTransactions = transferTransactionsData?.data.map(
+    const dbTransactions = dbTransactionsData?.data.map(
       (transaction: ITransaction) => ({
         id: transaction.id,
         name: transaction.name,
@@ -110,7 +110,7 @@ export async function getBankAccount({ bankId }: { bankId: string }) {
     });
 
     // Get plaid transations
-    const transactions = await getTransactions({
+    const plaidTransactions = await getTransactions({
       accessToken: bank.accessToken,
     });
 
@@ -128,16 +128,29 @@ export async function getBankAccount({ bankId }: { bankId: string }) {
     };
 
     // Sort transactions
-    const allTransactions = [...transactions, ...transferTransactions!].sort(
+    const allTransactions: TTransaction[] = [
+      ...plaidTransactions,
+      ...dbTransactions!,
+    ].sort(
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
 
-    console.log("all", allTransactions);
-
     return { data: account, transactions: allTransactions };
   } catch (error) {
-    console.log(`Failed to find bank account`);
+    console.log(`Failed to find bank account ${error}`);
+  }
+}
+
+export async function getBankByAccount({ accountId }: { accountId: string }) {
+  try {
+    const bank = await api.banks.getByAccountId.query(accountId);
+
+    if (!bank) return null;
+
+    return bank;
+  } catch (error) {
+    console.log(`Failed to get bank by accountId, ${error}`);
   }
 }
 

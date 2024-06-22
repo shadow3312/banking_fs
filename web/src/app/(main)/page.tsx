@@ -12,12 +12,16 @@ export default async function Home() {
   const user = session?.user.user;
   const banks = await getBankAccounts({ userId: user?.id! });
 
+  if (!banks) return;
+
   return (
     <main className="home-page">
-      <div className="home-main">
-        <HomeHeader user={user} />
-        {user && <LastTransactions user={user} />}
-      </div>
+      {user && (
+        <div className="home-main">
+          <HomeHeader user={user} />
+          <LastTransactions user={user} />
+        </div>
+      )}
       <Suspense fallback={<Spinner />}>
         <HomeAside banks={banks?.data} />
       </Suspense>

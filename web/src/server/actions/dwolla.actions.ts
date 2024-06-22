@@ -90,9 +90,7 @@ export async function initiateTransfer({
           href: sourceFundingSourceUrl,
         },
         destination: {
-          source: {
-            href: destinationFundingSourceUrl,
-          },
+          href: destinationFundingSourceUrl,
         },
       },
       amount: {
@@ -104,6 +102,6 @@ export async function initiateTransfer({
 
     return response.headers.get("location");
   } catch (error) {
-    console.log(`Failed to create dwolla transfer ${error}`);
+    throw new Error(`Failed to create dwolla transfer ${error}`);
   }
 }

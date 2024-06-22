@@ -2,9 +2,13 @@
 
 import { api } from "@/trpc/server";
 
-export async function createTransaction(transactionData: ITransaction) {
+export async function createTransaction(transactionData: ITransactionCreate) {
   try {
-    const transaction = await api.transactions.create.mutate(transactionData);
+    const transaction = await api.transactions.create.mutate({
+      ...transactionData,
+      channel: "Online",
+      category: "Transfer",
+    });
 
     return transaction;
   } catch (error) {

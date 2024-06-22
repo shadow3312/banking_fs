@@ -9,7 +9,7 @@ interface ITransaction {
   receiverId: string;
   senderBankId: string;
   receiverBankId: string;
-  createdAt?: number;
+  createdAt?: string;
 }
 
 interface IBuildMakeTransaction {
@@ -28,5 +28,5 @@ interface IMakeTransactionMethods {
   getReceiverId: () => string;
   getSenderBankId: () => string;
   getReceiverBankId: () => string;
-  getCreatedAt: () => number | undefined;
+  getCreatedAt: () => string | undefined;
 }

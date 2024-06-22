@@ -27,11 +27,10 @@ interface MonthlyData {
 
 const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
-export default function HomeHeader({ user }: { user: IUser | undefined }) {
+export default function HomeHeader({ user }: { user: IUser }) {
   const selectedBank = useRecoilValue(selectedBankAtom);
-  const { isLoading, transactions, fetchTransactions } = useFetchTransaction(
-    user!,
-  );
+  const { isLoading, transactions, fetchTransactions } =
+    useFetchTransaction(user);
 
   useEffect(() => {
     if (selectedBank) {
