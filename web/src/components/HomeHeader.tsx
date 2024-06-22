@@ -66,15 +66,12 @@ export default function HomeHeader({ user }: { user: IUser | undefined }) {
       <h3 className="title">
         Hi, {user?.firstName} {user?.lastName}
       </h3>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <TransactionsChart
-          incomes={monthlyData.incomes}
-          outcomes={monthlyData.outcomes}
-          labels={labels}
-        />
-      )}
+      <TransactionsChart
+        incomes={monthlyData.incomes}
+        outcomes={monthlyData.outcomes}
+        labels={labels}
+        isLoading={isLoading}
+      />
     </div>
   );
 }

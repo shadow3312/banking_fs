@@ -11,6 +11,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import { useRecoilValue } from "recoil";
 import { selectedBankAtom } from "@/state/atom";
+import Spinner from "./Spinner";
 
 ChartJS.register(
   CategoryScale,
@@ -25,12 +26,14 @@ interface ChartProps {
   incomes: number[];
   outcomes: number[];
   labels: string[];
+  isLoading?: boolean;
 }
 
 export default function TransactionsChart({
   incomes,
   outcomes,
   labels,
+  isLoading = false,
 }: ChartProps) {
   const selectedBank = useRecoilValue(selectedBankAtom);
 
@@ -72,5 +75,14 @@ export default function TransactionsChart({
       },
     ],
   };
-  return <Bar options={options} data={data} />;
+  return (
+    <div className="relative">
+      {isLoading && (
+        <div className="absolute left-0 grid h-full w-full place-items-center border bg-black/30 dark:bg-black/60">
+          <Spinner large />
+        </div>
+      )}
+      <Bar options={options} data={data} />
+    </div>
+  );
 }
