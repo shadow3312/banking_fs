@@ -319,4 +319,27 @@
   /* #endregion */
 
   /* #endregion */
+
+  /* #region History page */
+  .history-page {
+    @apply no-scrollbar mb-24 mt-4 h-full overflow-y-scroll md:mb-8;
+  }
+
+  .history-header {
+    @apply mb-8;
+  }
+
+  .history-banks {
+    @apply h-56;
+  }
+
+  .history-header .subtitle {
+    @apply text-gray-600 dark:text-gray-300;
+  }
+
+  .history-transactions {
+    @apply mb-8 h-full w-full;
+  }
+
+  /* #endregion */
 }

@@ -21,7 +21,7 @@ export default async function HomeAside({ banks }: HomeAsideProps) {
 
       {banks && user && <BankCardStack banks={banks} user={user} />}
 
-      <UserList user={user} />
+      <UserList />
     </div>
   );
 }
