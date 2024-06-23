@@ -1,7 +1,7 @@
 import { Icons } from "@/components/Icons";
 import { cn } from "@/lib/utils";
 
-const className = "dark:text-white md:text-black text-white";
+export const navIconClassName = "dark:text-white md:text-black text-white";
 
 const navLinks: NavLinks = {
   sidebarConfig: [
@@ -11,7 +11,7 @@ const navLinks: NavLinks = {
       href: "/",
       icon: (isActive: boolean) =>
         Icons.home({
-          className: cn(className, isActive && "nav-icon-active"),
+          className: cn(navIconClassName, isActive && "nav-icon-active"),
         }),
     },
     {
@@ -20,18 +20,9 @@ const navLinks: NavLinks = {
       href: "/history",
       icon: (isActive: boolean) =>
         Icons.history({
-          className: cn(className, isActive && "nav-icon-active"),
+          className: cn(navIconClassName, isActive && "nav-icon-active"),
         }),
     },
-    // {
-    //   title: "Send money",
-    //   mobileTitle: "Send",
-    //   href: "/send",
-    //   icon: (isActive: boolean) =>
-    //     Icons.fundsOut({
-    //       className: cn(className, isActive && "nav-icon-active"),
-    //     }),
-    // },
   ],
 };
 export { navLinks };

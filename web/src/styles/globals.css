@@ -142,7 +142,7 @@
   /* #region NAV */
 
   .sidebar {
-    @apply hidden h-full w-full flex-col border-r p-6 md:flex;
+    @apply hidden h-full w-full flex-col border-r md:flex md:p-4 lg:p-6;
   }
 
   .nav-items {
@@ -232,13 +232,13 @@
 
   /* #region MAIN SLOT LAYOUT */
   .main {
-    @apply h-screen p-4 md:p-4;
+    @apply h-screen p-4;
   }
   /* #endregion */
 
   /* #region HOME PAGE */
   .home-page {
-    @apply mb-24 h-full grid-cols-3 gap-4 gap-y-4 md:grid;
+    @apply no-scrollbar mb-24 h-full grid-cols-3 gap-4 gap-y-4 md:overflow-y-scroll lg:grid;
   }
 
   .home-main {
@@ -247,6 +247,30 @@
 
   .home-header {
     @apply h-auto w-full rounded-xl border p-4;
+  }
+
+  .home-stats {
+    @apply grid-cols-2 gap-4 sm:grid;
+  }
+
+  .home-cards-wrapper {
+    @apply col-span-1 my-6 grid grid-cols-2 gap-4;
+  }
+
+  .home-card {
+    @apply relative col-span-1 flex items-center justify-center gap-2 rounded-lg bg-secondary p-4 shadow-lg dark:bg-primary dark:shadow-sm;
+  }
+
+  .home-card-title {
+    @apply text-sm;
+  }
+
+  .home-card-subtitle {
+    @apply text-lg font-bold;
+  }
+
+  .transactions-chart {
+    @apply relative col-span-1 w-full;
   }
 
   /* #region ASIDE */
@@ -313,7 +337,7 @@
   }
 
   .transfer-form-header {
-    @apply flex items-center justify-between rounded-xl bg-gray-500 p-4 dark:bg-slate-800;
+    @apply flex items-center justify-between rounded-xl bg-gray-300 p-4 shadow-sm shadow-black/50 dark:bg-slate-800;
   }
 
   /* #endregion */

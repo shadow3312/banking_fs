@@ -67,7 +67,7 @@ export default function BankCardStack({ banks, user }: BankCardStackProps) {
 
                   cursor: canDrag ? "grab" : "auto",
                 }}
-                className="h-full w-full"
+                className="grid h-full w-full place-items-center"
                 animate={{
                   top: index * -CARD_OFFSET,
                   scale: 1 - index * SCALE_FACTOR,

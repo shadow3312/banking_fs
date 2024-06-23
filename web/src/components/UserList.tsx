@@ -97,13 +97,13 @@ export default function UserList() {
                   <div
                     className={cn(
                       destinationFundingSource === bank.publicId &&
-                        "bg-secondary",
+                        "bg-secondary/50",
                       "flex cursor-pointer p-2",
                     )}
                     key={bank.id}
                     onClick={() => handleClickPublicId(bank.publicId)}
                   >
-                    <p>
+                    <p className="text-white">
                       Bank {index + 1}: {truncateText(bank.publicId, 24)}
                     </p>
                   </div>

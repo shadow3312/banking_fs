@@ -5,27 +5,9 @@ import TransactionsChart from "./TransactionsChart";
 import { useRecoilValue } from "recoil";
 import { selectedBankAtom } from "@/state/atom";
 import { useFetchTransaction } from "@/lib/hooks/useFetchTransactions";
-import Spinner from "./Spinner";
-
-interface Transaction {
-  id: string;
-  name: string;
-  amount: number;
-  channel: string;
-  category: {
-    confidence_level: string;
-    detailed: string;
-    primary: string;
-  };
-  createdAt: string;
-}
-
-interface MonthlyData {
-  incomes: number[];
-  outcomes: number[];
-}
-
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+import { Icons } from "./Icons";
+import { formatAmount, getTransactionsStats } from "@/lib/utils";
+import LoadingOverlay from "./LoadingOverlay";
 
 export default function HomeHeader({ user }: { user: IUser }) {
   const selectedBank = useRecoilValue(selectedBankAtom);
@@ -38,39 +20,43 @@ export default function HomeHeader({ user }: { user: IUser }) {
     }
   }, [selectedBank]);
 
-  function getMonthlyData(transactions: Transaction[]): MonthlyData {
-    const monthlyIncomes = Array(7).fill(0);
-    const monthlyOutcomes = Array(7).fill(0);
+  const transactionsStats = getTransactionsStats(transactions);
 
-    transactions.forEach((transaction) => {
-      const date = new Date(transaction.createdAt);
-      const month = date.getMonth(); // 0-based month index
-
-      if (month >= 0 && month < 7) {
-        if (transaction.amount > 0) {
-          monthlyIncomes[month] += Math.abs(transaction.amount);
-        } else {
-          monthlyOutcomes[month] += Math.abs(transaction.amount);
-        }
-      }
-    });
-    return {
-      incomes: monthlyIncomes,
-      outcomes: monthlyOutcomes,
-    };
-  }
-  const monthlyData = getMonthlyData(transactions);
   return (
     <div className="home-header">
       <h3 className="title">
         Hi, {user?.firstName} {user?.lastName}
       </h3>
-      <TransactionsChart
-        incomes={monthlyData.incomes}
-        outcomes={monthlyData.outcomes}
-        labels={labels}
-        isLoading={isLoading}
-      />
+      <div className="home-stats">
+        <div className="home-cards-wrapper">
+          <div className="home-card">
+            {isLoading && <LoadingOverlay />}
+            <div>{Icons.arrowDown({})}</div>
+            <div className="flex flex-col">
+              <h3 className="home-card-title">Total income</h3>
+              <h4 className="home-card-subtitle">
+                {formatAmount(transactionsStats.totalIncome)}
+              </h4>
+            </div>
+          </div>
+          <div className="home-card">
+            {isLoading && <LoadingOverlay />}
+            <div>{Icons.arrowUp({})}</div>
+            <div className="flex flex-col">
+              <h3 className="home-card-title">Total expense</h3>
+              <h4 className="home-card-subtitle">
+                {formatAmount(transactionsStats.totalExpense)}
+              </h4>
+            </div>
+          </div>
+        </div>
+        <TransactionsChart
+          income={transactionsStats.monthlyIncome}
+          expense={transactionsStats.monthlyExpense}
+          labels={transactionsStats.labels}
+          isLoading={isLoading}
+        />
+      </div>
     </div>
   );
 }

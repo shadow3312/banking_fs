@@ -103,3 +103,52 @@ export const getTransactionStatus = (date: Date) => {
 
   return date > twoDaysAgo ? "Processing" : "Success";
 };
+
+export function getTransactionsStats(
+  transactions: TTransaction[],
+): IMonthlyData {
+  let totalIncome = 0;
+  let totalExpense = 0;
+  const monthlyData: { [key: string]: { income: number; expense: number } } =
+    {};
+
+  transactions.forEach((transaction) => {
+    const date = new Date(transaction.createdAt);
+    const month = date.toLocaleString("default", { month: "short" });
+    const year = date.getFullYear();
+    const key = `${month} ${year}`;
+
+    if (!monthlyData[key]) {
+      monthlyData[key] = { income: 0, expense: 0 };
+    }
+
+    if (transaction.amount > 0) {
+      monthlyData[key]!.income += Number(transaction.amount);
+      totalIncome += Number(transaction.amount);
+    } else {
+      monthlyData[key]!.expense += Math.abs(Number(transaction.amount));
+      totalExpense += Math.abs(Number(transaction.amount));
+    }
+  });
+
+  const labels = Object.keys(monthlyData).sort((a, b) => {
+    const [monthA, yearA] = a.split(" ");
+    const [monthB, yearB] = b.split(" ");
+
+    const dateA = new Date(`${monthA} 1, ${yearA}`);
+    const dateB = new Date(`${monthB} 1, ${yearB}`);
+
+    return dateA.getTime() - dateB.getTime();
+  });
+
+  const monthlyIncome = labels.map((label) => monthlyData[label]!.income);
+  const monthlyExpense = labels.map((label) => monthlyData[label]!.expense);
+
+  return {
+    labels,
+    monthlyIncome,
+    monthlyExpense,
+    totalIncome,
+    totalExpense,
+  };
+}

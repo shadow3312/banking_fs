@@ -88,7 +88,7 @@ export const Icons = {
     <svg
       viewBox="-0.5 0 25 25"
       fill="none"
-      xmlnsk="http://www.w3.org/2000/svg"
+      xmlns="http://www.w3.org/2000/svg"
       className={cn(className, props.className)}
       stroke="currentColor"
     >
@@ -194,6 +194,68 @@ export const Icons = {
           d="m617.38 280.22c4.574-11.963 22.038-58.036 22.038-58.036-0.327 0.554 4.54-12.019 7.333-19.813l3.741 17.898s10.59 49.557 12.804 59.949h-45.917l1e-3 2e-3z"
           fill="transparent"
         ></path>
+      </g>
+    </svg>
+  ),
+  arrowUp: (props: IconProps) => (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={cn(className, props.className)}
+      stroke="currentColor"
+    >
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        strokeLinejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        {" "}
+        <path
+          d="M12.0703 22V2"
+          strokeWidth="1.5"
+          stroke-linecap="round"
+          strokeLinejoin="round"
+        ></path>{" "}
+        <path
+          d="M5 8L10 2.84009C10.2571 2.5677 10.5671 2.35047 10.911 2.20215C11.2549 2.05383 11.6255 1.97754 12 1.97754C12.3745 1.97754 12.7451 2.05383 13.089 2.20215C13.4329 2.35047 13.7429 2.5677 14 2.84009L19 8"
+          strokeWidth="1.5"
+          stroke-linecap="round"
+          strokeLinejoin="round"
+        ></path>{" "}
+      </g>
+    </svg>
+  ),
+  arrowDown: (props: IconProps) => (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={cn(className, props.className)}
+      stroke="currentColor"
+    >
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        {" "}
+        <path
+          d="M11.9297 2V22"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        ></path>{" "}
+        <path
+          d="M19 16L14 21.1599C13.7437 21.4336 13.434 21.6519 13.0899 21.801C12.7459 21.9502 12.375 22.0271 12 22.0271C11.625 22.0271 11.2541 21.9502 10.9101 21.801C10.566 21.6519 10.2563 21.4336 10 21.1599L5 16"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        ></path>{" "}
       </g>
     </svg>
   ),

@@ -1,6 +1,6 @@
 "use client";
 
-import { navLinks } from "@/config/links";
+import { navIconClassName, navLinks } from "@/config/links";
 import { cn, getInitials } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -45,7 +45,7 @@ export default function MobileNav({ user }: NavProps) {
             <TransferSheet>
               <div>
                 <div className={cn("nav-icon-wrapper")}>
-                  {Icons.fundsOut({})}
+                  {Icons.fundsOut({ className: navIconClassName })}
                 </div>
                 <span className={cn("nav-title")}>Send</span>
               </div>

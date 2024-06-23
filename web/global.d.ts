@@ -151,6 +151,14 @@ interface IInitiateTransferOptions {
 
 type ITransactionCreate = Omit<ITransaction, "id" | "channel" | "category">;
 
+interface IMonthlyData {
+  labels: string[];
+  monthlyIncome: number[];
+  monthlyExpense: number[];
+  totalIncome: number;
+  totalExpense: number;
+}
+
 interface TTransaction {
   id: string;
   name: string;

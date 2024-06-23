@@ -18,8 +18,9 @@ export default async function HomeAside({ banks }: HomeAsideProps) {
         <h3 className="title">My Banks</h3>
         {user && <PlaidLink user={user} />}
       </div>
-
-      {banks && user && <BankCardStack banks={banks} user={user} />}
+      <div className="mx-auto -ml-2 md:m-0">
+        {banks && user && <BankCardStack banks={banks} user={user} />}
+      </div>
 
       <UserList />
     </div>

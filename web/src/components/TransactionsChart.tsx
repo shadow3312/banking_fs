@@ -24,15 +24,15 @@ ChartJS.register(
 );
 
 interface ChartProps {
-  incomes: number[];
-  outcomes: number[];
+  income: number[];
+  expense: number[];
   labels: string[];
   isLoading?: boolean;
 }
 
 export default function TransactionsChart({
-  incomes,
-  outcomes,
+  income,
+  expense,
   labels,
   isLoading = false,
 }: ChartProps) {
@@ -65,20 +65,20 @@ export default function TransactionsChart({
     labels,
     datasets: [
       {
-        label: "Incomes",
-        data: incomes,
+        label: "Income",
+        data: income,
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
-        label: "Outcomes",
-        data: outcomes,
+        label: "Expense",
+        data: expense,
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
   return (
-    <div className="relative">
-      {isLoading && <LoadingOverlay />}
+    <div className="transactions-chart">
+      {isLoading && <LoadingOverlay large={false} />}
       <Bar options={options} data={data} />
     </div>
   );

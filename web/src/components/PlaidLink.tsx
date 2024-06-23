@@ -24,6 +24,7 @@ import { useRecoilState } from "recoil";
 import { firstLaunchAtom, loadingActivityAtom } from "@/state/atom";
 import { toast } from "./ui/use-toast";
 import { useLoading } from "@/lib/hooks/useLoading";
+import { Icons } from "./Icons";
 
 interface Props {
   user: IUser;
@@ -96,7 +97,7 @@ export default function PlaidLink({ user, large = false }: Props) {
     <Button onClick={() => handleOpen()}>Connect bank</Button>
   ) : (
     <Button size={"icon"} onClick={() => handleOpen()}>
-      <PlusCircle />
+      {Icons.cardAdd({ className: "text-white" })}
     </Button>
   );
 }
