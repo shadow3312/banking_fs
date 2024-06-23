@@ -39,7 +39,6 @@ const FormInput = <T extends FieldValues>({
                 className="form-input"
                 type={name === "password" ? "password" : "text"}
                 {...field}
-                value={value}
                 defaultValue={defaultValue}
               />
             </FormControl>
