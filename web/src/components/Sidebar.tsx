@@ -1,19 +1,12 @@
 "use client";
 
 import { navLinks } from "@/config/links";
-import { cn, getInitials, truncateText } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import ThemeToggle from "./ThemeToggle";
 import LogoutButton from "./LogoutButton";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
-import UserAvatar from "./UserAvatar";
 import UserInfo from "./UserInfo";
 import TransferSheet from "./TransferSheet";
 import { Icons } from "./Icons";

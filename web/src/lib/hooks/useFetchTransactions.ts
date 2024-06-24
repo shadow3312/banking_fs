@@ -2,7 +2,7 @@
 
 import { getBankAccount, getBankAccounts } from "@/server/actions/bank.actions";
 import { selectedBankAtom } from "@/state/atom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
 
 export function useFetchTransaction(user: IUser) {

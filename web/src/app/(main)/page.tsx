@@ -2,9 +2,8 @@ import HomeAside from "@/components/HomeAside";
 import Welcome from "@/components/Welcome";
 import { getServerAuthSession } from "@/server/auth";
 import HomeHeader from "@/components/HomeHeader";
-import { getBankAccount, getBankAccounts } from "@/server/actions/bank.actions";
+import { getBankAccounts } from "@/server/actions/bank.actions";
 import { Suspense } from "react";
-import Spinner from "@/components/Spinner";
 import LastTransactions from "@/components/LastTransactions";
 import LoadingSection from "@/components/LoadingSection";
 

@@ -2,7 +2,6 @@
 
 import { api } from "@/trpc/server";
 import { addFundingSource, createDwollaCustomer } from "./dwolla.actions";
-import { signIn } from "next-auth/react";
 import { encryptId, extractCustomerId } from "@/lib/utils";
 import plaidClient from "../plaid";
 import {
@@ -13,8 +12,6 @@ import {
   Products,
 } from "plaid";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import { TRPCClientError } from "@trpc/client";
 
 export async function registerUser(userPayload: IRegisterPayload) {
   try {

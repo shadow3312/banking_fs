@@ -3,10 +3,6 @@ import { FormControl, FormField, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 
 import { Control, FieldPath, FieldValues } from "react-hook-form";
-import { ZodType, z } from "zod";
-import { authFormSchema } from "@/lib/schemas";
-
-const formSchema = authFormSchema();
 
 interface FormInputProps<T extends FieldValues> {
   control: Control<T>;

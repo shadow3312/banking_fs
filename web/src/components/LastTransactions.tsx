@@ -1,10 +1,7 @@
 "use client";
-
-import { getBankAccount, getBankAccounts } from "@/server/actions/bank.actions";
-import { loadingActivityAtom, selectedBankAtom } from "@/state/atom";
-import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import Spinner from "./Spinner";
+import { selectedBankAtom } from "@/state/atom";
+import React, { useEffect } from "react";
+import { useRecoilValue } from "recoil";
 import { useFetchTransaction } from "@/lib/hooks/useFetchTransactions";
 import TransactionsTable from "./TransactionsTable";
 import { useLoading } from "@/lib/hooks/useLoading";

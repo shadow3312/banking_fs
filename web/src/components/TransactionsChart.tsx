@@ -11,7 +11,6 @@ import {
 import { Bar } from "react-chartjs-2";
 import { useRecoilValue } from "recoil";
 import { selectedBankAtom } from "@/state/atom";
-import Spinner from "./Spinner";
 import LoadingOverlay from "./LoadingOverlay";
 
 ChartJS.register(

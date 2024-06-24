@@ -1,7 +1,6 @@
 "use client";
 
 import { loadingActivityAtom } from "@/state/atom";
-import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 export function useLoading(

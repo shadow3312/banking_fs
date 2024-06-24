@@ -1,19 +1,16 @@
 "use client";
-import { useCookies } from "next-client-cookies";
 
 import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { useSession } from "next-auth/react";
-import PlaidLink from "./PlaidLink";
 import { useRecoilState } from "recoil";
 import { firstLaunchAtom, linkReadyAtom, openPlaidAtom } from "@/state/atom";
 import Spinner from "./Spinner";

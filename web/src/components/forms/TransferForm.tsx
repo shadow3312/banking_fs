@@ -20,7 +20,6 @@ import {
 import { getBank } from "@/server/actions/user.actions";
 import { initiateTransfer } from "@/server/actions/dwolla.actions";
 import { createTransaction } from "@/server/actions/transaction.actions";
-import { useRouter } from "next/navigation";
 import { toast } from "../ui/use-toast";
 import { useLoading } from "@/lib/hooks/useLoading";
 

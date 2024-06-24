@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import BankCard from "./BankCard";
 import { move } from "@/lib/utils";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { loadingActivityAtom, selectedBankAtom } from "@/state/atom";
+import { useRecoilState } from "recoil";
+import { selectedBankAtom } from "@/state/atom";
 import Spinner from "./Spinner";
 import { useLoading } from "@/lib/hooks/useLoading";
 

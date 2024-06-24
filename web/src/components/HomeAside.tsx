@@ -1,11 +1,6 @@
 import React from "react";
-import { Button } from "./ui/button";
 import PlaidLink from "./PlaidLink";
-import BankCard from "./BankCard";
-import { Input } from "./ui/input";
-import UserInfo from "./UserInfo";
 import { getServerAuthSession } from "@/server/auth";
-import { ScrollArea } from "./ui/scroll-area";
 import BankCardStack from "./BankCardStack";
 import UserList from "./UserList";
 
