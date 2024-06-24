@@ -3,9 +3,7 @@
 import {
   usePlaidLink,
   PlaidLinkOnSuccess,
-  PlaidLinkOnEvent,
   PlaidLinkOnExit,
-  PlaidLinkOptions,
 } from "react-plaid-link";
 import React, {
   startTransition,
@@ -14,17 +12,17 @@ import React, {
   useState,
 } from "react";
 import { Button } from "./ui/button";
-import { PlusCircle } from "lucide-react";
 import {
   createLinkToken,
   exchangePublicToken,
 } from "@/server/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
-import { firstLaunchAtom, loadingActivityAtom } from "@/state/atom";
+import { firstLaunchAtom, linkReadyAtom, openPlaidAtom } from "@/state/atom";
 import { toast } from "./ui/use-toast";
 import { useLoading } from "@/lib/hooks/useLoading";
 import { Icons } from "./Icons";
+import Spinner from "./Spinner";
 
 interface Props {
   user: IUser;
@@ -35,6 +33,8 @@ export default function PlaidLink({ user, large = false }: Props) {
   const [token, setToken] = useState<string | null>("");
   const [isFirstLaunch, setIsFirstLaunch] = useRecoilState(firstLaunchAtom);
   const [isLoading, setLoading] = useLoading("BankCard");
+  const [openPlaid, setOpenPlaid] = useRecoilState(openPlaidAtom);
+  const [isLinkReady, setIsLinkReady] = useRecoilState(linkReadyAtom);
 
   const router = useRouter();
 
@@ -49,6 +49,7 @@ export default function PlaidLink({ user, large = false }: Props) {
   const onSuccess = useCallback<PlaidLinkOnSuccess>(
     // After getting a publicToken, exchange it for an access token
     async (publicToken: string) => {
+      setOpenPlaid(false);
       toast({
         title: "Hold on",
         description: "We're adding your bank account",
@@ -73,17 +74,13 @@ export default function PlaidLink({ user, large = false }: Props) {
   );
 
   const onExit = useCallback<PlaidLinkOnExit>((error, metadata) => {
+    setOpenPlaid(false);
     console.log(error, metadata);
   }, []);
 
   const handleOpen = () => {
-    setIsFirstLaunch(false);
-    open();
+    setOpenPlaid(true);
   };
-
-  useEffect(() => {
-    getLinkToken();
-  }, [user]);
 
   const config = {
     token,
@@ -93,6 +90,26 @@ export default function PlaidLink({ user, large = false }: Props) {
 
   const { open, ready } = usePlaidLink(config);
 
+  useEffect(() => {
+    getLinkToken();
+  }, [user]);
+
+  useEffect(() => {
+    setIsLinkReady(ready);
+  }, [ready]);
+
+  useEffect(() => {
+    if (ready && openPlaid) {
+      if (isFirstLaunch) {
+        setIsFirstLaunch(false);
+      }
+      open();
+    }
+  }, [openPlaid, ready]);
+
+  if (!ready) {
+    return <Spinner />;
+  }
   return large ? (
     <Button onClick={() => handleOpen()}>Connect bank</Button>
   ) : (

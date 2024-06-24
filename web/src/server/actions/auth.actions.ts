@@ -41,8 +41,6 @@ export async function registerUser(userPayload: IRegisterPayload) {
       dwollaCustomerId,
     });
 
-    console.log("user", user);
-
     return user;
   } catch (error) {
     console.log(error);

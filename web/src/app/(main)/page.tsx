@@ -6,6 +6,7 @@ import { getBankAccount, getBankAccounts } from "@/server/actions/bank.actions";
 import { Suspense } from "react";
 import Spinner from "@/components/Spinner";
 import LastTransactions from "@/components/LastTransactions";
+import LoadingSection from "@/components/LoadingSection";
 
 export default async function Home() {
   const session = await getServerAuthSession();
@@ -22,7 +23,7 @@ export default async function Home() {
           <LastTransactions user={user} />
         </div>
       )}
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<LoadingSection />}>
         <HomeAside banks={banks?.data} />
       </Suspense>
       <Welcome />

@@ -15,11 +15,14 @@ import { Button } from "./ui/button";
 import { useSession } from "next-auth/react";
 import PlaidLink from "./PlaidLink";
 import { useRecoilState } from "recoil";
-import { firstLaunchAtom } from "@/state/atom";
+import { firstLaunchAtom, linkReadyAtom, openPlaidAtom } from "@/state/atom";
+import Spinner from "./Spinner";
 
 export default function Welcome() {
   const [open, setOpen] = useState(false);
   const [isFirstLaunch, setIsFirstLaunch] = useRecoilState(firstLaunchAtom);
+  const [openPlaid, setOpenPlaid] = useRecoilState(openPlaidAtom);
+  const [isLinkReady, setIsLinkReady] = useRecoilState(linkReadyAtom);
   const { data: session } = useSession();
   const user = session?.user.user;
 
@@ -37,11 +40,18 @@ export default function Welcome() {
         <div className="">
           <p className="dialog-description">
             Since it's your first time here, let's begin by connecting a bank
-            account to manage your financial transaction
+            account to manage your financial transactions
           </p>
         </div>
         <DialogFooter className="sm:justify-start">
-          {user && <PlaidLink large user={user} />}
+          <Button
+            onClick={() => setOpenPlaid(true)}
+            type="button"
+            variant="secondary"
+            disabled={!isLinkReady}
+          >
+            {isLinkReady ? `Connect bank` : <Spinner />}
+          </Button>
           <DialogClose asChild>
             <Button
               onClick={() => setIsFirstLaunch(false)}

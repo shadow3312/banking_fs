@@ -14,9 +14,25 @@ const firstLaunchAtom = atom<boolean>({
   effects_UNSTABLE: [persistAtom],
 });
 
+const openPlaidAtom = atom<boolean>({
+  key: "open_plaid",
+  default: false,
+});
+
+const linkReadyAtom = atom<boolean>({
+  key: "link_ready",
+  default: false,
+});
+
 const loadingActivityAtom = atom<ILoadingActivity>({
   key: "loadingActivity",
   default: {},
 });
 
-export { selectedBankAtom, firstLaunchAtom, loadingActivityAtom };
+export {
+  selectedBankAtom,
+  firstLaunchAtom,
+  loadingActivityAtom,
+  openPlaidAtom,
+  linkReadyAtom,
+};
