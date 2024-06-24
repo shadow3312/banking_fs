@@ -77,6 +77,7 @@ const config = {
         "credit-card": "url('/images/card-bg.png')",
         "debit-card": "url('/images/card2.png')",
         app: "url('/images/app.png')",
+        "app-light": "url('/images/app-light.png')",
       },
     },
   },
