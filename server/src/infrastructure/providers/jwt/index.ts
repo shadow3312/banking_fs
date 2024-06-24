@@ -10,7 +10,7 @@ export default function JWTProvider(): IJWTProvider {
   });
 
   function generateToken(payload: object) {
-    return jwt.sign(payload, secret, { expiresIn: "24h" });
+    return jwt.sign(payload, secret);
   }
   function verifyToken(token: string) {
     return jwt.verify(token, secret) as IJwtPayload;
