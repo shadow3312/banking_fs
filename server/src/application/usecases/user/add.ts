@@ -23,7 +23,6 @@ export default function makeAddUserUseCase({
       const passwordHash = await passwordProvider.hash(user.getPassword());
 
       user.setPasswordHash(passwordHash);
-      console.log("user", user.getPassword());
     }
 
     const userObj = toObject(user);

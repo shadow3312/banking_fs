@@ -20,8 +20,10 @@ import {
   transactionObject2,
 } from "@/shared/utils/const";
 import { Sequelize } from "sequelize";
+
 describe("Transaction usecases", () => {
   let db: Sequelize;
+  let currentDate = new Date().toJSON().slice(0, 10);
 
   beforeAll(async () => {
     db = await makeDb();
@@ -40,6 +42,9 @@ describe("Transaction usecases", () => {
     await models.Transaction.create(transactionObject);
     await models.Transaction.create(transactionObject2);
     const transactions = await listTransactions();
+
+    transactionObject.createdAt = currentDate;
+    transactionObject2.createdAt = currentDate;
 
     expect(transactions).toHaveLength(2);
     expect(transactions[1]).toEqual(transactionObject);
