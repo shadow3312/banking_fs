@@ -13,6 +13,7 @@ import { transactionObject, transactionObject2 } from "@/shared/utils/const";
 
 describe("Transaction repository", () => {
   let db: Sequelize;
+  let currentDate = new Date().toJSON().slice(0, 10);
 
   beforeEach(async () => {
     db = await makeDb();
@@ -33,6 +34,8 @@ describe("Transaction repository", () => {
 
       const results = await transactionRepository.findAll();
 
+      transactionObject.createdAt = currentDate;
+
       expect(results).toHaveLength(2);
       expect(results[1]).toEqual(transactionObject);
     });
@@ -42,7 +45,7 @@ describe("Transaction repository", () => {
     it("should return a transaction if found", async () => {
       await models.Transaction.create(transactionObject);
 
-      const result = await transactionRepository.findById("wj3ojndioo0ejkl");
+      const result = await transactionRepository.findById(transactionObject.id);
 
       expect(result).toEqual(transactionObject);
     });
