@@ -12,7 +12,7 @@ export function useFetchTransaction(user: IUser) {
 
   const fetchTransactions = async () => {
     setIsLoading(true);
-    const bankAccounts = await getBankAccounts({ userId: user?.id! });
+    const bankAccounts = await getBankAccounts({ userId: user.id });
     const defaultBank = bankAccounts?.data[0];
 
     if (!selectedBank && !defaultBank) {

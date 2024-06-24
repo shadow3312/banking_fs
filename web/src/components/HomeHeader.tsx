@@ -14,13 +14,21 @@ export default function HomeHeader({ user }: { user: IUser }) {
   const { isLoading, transactions, fetchTransactions } =
     useFetchTransaction(user);
 
+  const [transactionsStats, setTransactionsStats] = useState<IMonthlyData>();
+
   useEffect(() => {
     if (selectedBank) {
       fetchTransactions();
     }
   }, [selectedBank]);
 
-  const transactionsStats = getTransactionsStats(transactions);
+  useEffect(() => {
+    if (transactions) {
+      const transactionsStatsData = getTransactionsStats(transactions);
+
+      setTransactionsStats(transactionsStatsData);
+    }
+  }, [transactions]);
 
   return (
     <div className="home-header">
@@ -35,7 +43,8 @@ export default function HomeHeader({ user }: { user: IUser }) {
             <div className="flex flex-col">
               <h3 className="home-card-title">Total income</h3>
               <h4 className="home-card-subtitle">
-                {formatAmount(transactionsStats.totalIncome)}
+                {transactionsStats &&
+                  formatAmount(transactionsStats.totalIncome)}
               </h4>
             </div>
           </div>
@@ -45,15 +54,16 @@ export default function HomeHeader({ user }: { user: IUser }) {
             <div className="flex flex-col">
               <h3 className="home-card-title">Total expense</h3>
               <h4 className="home-card-subtitle">
-                {formatAmount(transactionsStats.totalExpense)}
+                {transactionsStats &&
+                  formatAmount(transactionsStats.totalExpense)}
               </h4>
             </div>
           </div>
         </div>
         <TransactionsChart
-          income={transactionsStats.monthlyIncome}
-          expense={transactionsStats.monthlyExpense}
-          labels={transactionsStats.labels}
+          income={transactionsStats?.monthlyIncome}
+          expense={transactionsStats?.monthlyExpense}
+          labels={transactionsStats?.labels}
           isLoading={isLoading}
         />
       </div>

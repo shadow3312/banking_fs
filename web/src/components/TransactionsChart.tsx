@@ -24,9 +24,9 @@ ChartJS.register(
 );
 
 interface ChartProps {
-  income: number[];
-  expense: number[];
-  labels: string[];
+  income?: number[];
+  expense?: number[];
+  labels?: string[];
   isLoading?: boolean;
 }
 

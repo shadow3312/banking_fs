@@ -28,11 +28,13 @@ export default function BankCardStack({ banks, user }: BankCardStackProps) {
 
   useEffect(() => {
     setSelectedBank(banks[visibleCardIndex]);
-  }, [visibleCardIndex, banks]);
+  }, [visibleCardIndex]);
 
   useEffect(() => {
-    setSelectedBank(banks[0]);
-  }, []);
+    if (banks) {
+      setSelectedBank(banks[0]);
+    }
+  }, [banks]);
 
   useEffect(() => {
     setCards(banks);

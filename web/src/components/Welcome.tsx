@@ -57,6 +57,7 @@ export default function Welcome() {
               onClick={() => setIsFirstLaunch(false)}
               type="button"
               variant="secondary"
+              className="mb-2 sm:mb-0"
             >
               I will do this later
             </Button>
