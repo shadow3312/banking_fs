@@ -10,6 +10,8 @@ import { addUser, editUser, getUser, listUsers, removeUser } from ".";
 import { makeDb, models } from "@/infrastructure/data/config";
 import { cleanUserObject, userObject, userObject2 } from "@/shared/utils/const";
 import { Sequelize } from "sequelize";
+import PasswordProvider from "@/infrastructure/providers/passwordHasher";
+
 describe("User usecases", () => {
   let db: Sequelize;
 
@@ -36,11 +38,16 @@ describe("User usecases", () => {
     expect(users[1]).toEqual(userObject2);
   });
 
-  it("should add a user", async () => {
+  it("should hash password properly before adding a user", async () => {
     const user = await addUser(cleanUserObject);
+    const passwordProvider = PasswordProvider();
+    const isPasswordWatch = await passwordProvider.compare(
+      cleanUserObject.password,
+      user.password
+    );
 
     expect(user.id).toBeDefined();
-    expect(user).toMatchObject(cleanUserObject);
+    expect(isPasswordWatch).toBe(true);
   });
 
   it("should get a user by id", async () => {

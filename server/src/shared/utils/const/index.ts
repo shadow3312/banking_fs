@@ -1,11 +1,22 @@
-const cleanUserObject: Partial<IUser> = {
+type ICleanUser = Omit<IUser, "id">;
+type ICleanTransaction = Omit<ITransaction, "id">;
+type ICleanBank = Omit<IBank, "id">;
+
+const cleanUserObject: ICleanUser = {
   firstName: "John",
   lastName: "Doe",
+  address1: "address1",
+  dateOfBirth: "2023-02-12",
+  password: "123456",
+  postalCode: "3242",
+  ssn: "124",
   city: "New York",
+  state: "CA",
   email: "email@gmail.com",
   dwollaCustomerId: "c43ndnjuwi3nndb",
   dwollaCustomerUrl: "random-url",
 };
+
 const userObject: IUser = {
   id: "wj3ojndioo0ejkl",
   firstName: "John",
@@ -32,7 +43,7 @@ const userObject2: IUser = {
   postalCode: "3942",
   ssn: "123",
   state: "NY",
-  email: "email@gmail.com",
+  email: "email24@gmail.com",
   dwollaCustomerId: "c43ndnjuwi3nndb",
   dwollaCustomerUrl: "random-url",
 };
@@ -50,7 +61,7 @@ const transactionObject: ITransaction = {
   receiverBankId: "d54ndnijdone",
 };
 
-const cleanTransactionObject: Partial<ITransaction> = {
+const cleanTransactionObject: ICleanTransaction = {
   name: "John",
   email: "email@gmail.com",
   channel: "Online",
@@ -92,7 +103,7 @@ const bankObject2: IBank = {
   userId: "n3ognlwn33okm",
 };
 
-const cleanBankObject: Partial<IBank> = {
+const cleanBankObject: ICleanBank = {
   accessToken: "dnksodnvkonow3nw",
   fundingSourceUrl: "http://source.url",
   accountId: "wqojfwiqff",
