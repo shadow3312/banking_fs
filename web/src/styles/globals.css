@@ -92,7 +92,7 @@
     @apply elevate mx-auto h-auto w-full grid-cols-2 rounded-2xl bg-white dark:shadow-none md:grid md:w-3/4;
   }
   .auth-bottom {
-    @apply flex gap-1 pt-6 md:absolute md:bottom-12 md:mt-0;
+    @apply flex flex-row items-center gap-3 pt-6 md:absolute md:bottom-12 md:mt-0 md:flex-col md:items-start;
   }
 
   .auth-left {
@@ -100,7 +100,7 @@
   }
 
   .auth-right {
-    @apply bg-app col-span-1 rounded-r-2xl bg-secondary bg-cover bg-center dark:bg-primary;
+    @apply col-span-1 rounded-r-2xl bg-secondary bg-app bg-cover bg-center dark:bg-primary;
   }
   .auth-form-wrapper {
     @apply w-full space-y-4 px-2 text-center;

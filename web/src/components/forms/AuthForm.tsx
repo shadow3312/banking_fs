@@ -176,7 +176,10 @@ export default function AuthForm({ type }: AuthFormProps) {
       <div>
         {isLoginForm ? `Don't have an account yet` : `Already have an account`}{" "}
         ?{" "}
-        <Link href={isLoginForm ? "/register" : "/login"}>
+        <Link
+          className="font-semibold text-primary dark:text-green-400"
+          href={isLoginForm ? "/register" : "/login"}
+        >
           {isLoginForm ? `Register` : `Login`}
         </Link>
       </div>
