@@ -1,16 +1,9 @@
 import { describe, expect, it } from "@jest/globals";
 import makeFakeUser from "~/user";
 import makeUser from ".";
+import { userObject } from "@/shared/utils/const";
 
 describe("User", () => {
-  const userObject: Partial<IUser> = {
-    firstName: "John",
-    lastName: "Doe",
-    city: "New York",
-    email: "email@gmail.com",
-    dwollaCustomerId: "c43ndnjuwi3nndb",
-    dwollaCustomerUrl: "random-url",
-  };
   it("can be created", () => {
     const insert = makeFakeUser(userObject);
     const user = makeUser(insert);
@@ -20,6 +13,12 @@ describe("User", () => {
     expect(user.getLastName()).toBe(userObject.lastName);
     expect(user.getCity()).toBe(userObject.city);
     expect(user.getEmail()).toBe(userObject.email);
+    expect(user.getAdress()).toBe(userObject.address1);
+    expect(user.getCity()).toBe(userObject.city);
+    expect(user.getPassword()).toBe(userObject.password);
+    expect(user.getState()).toBe(userObject.state);
+    expect(user.getSsn()).toBe(userObject.ssn);
+    expect(user.getPostalCode()).toBe(userObject.postalCode);
     expect(user.getDwollaCustomerId()).toBe(userObject.dwollaCustomerId);
     expect(user.getDwollaCustomerUrl()).toBe(userObject.dwollaCustomerUrl);
   });
