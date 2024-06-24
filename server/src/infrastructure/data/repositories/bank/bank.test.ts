@@ -52,6 +52,27 @@ describe("Bank repository", () => {
     });
   });
 
+  describe("findByAccountId", () => {
+    it("should return banks for a given accountId", async () => {
+      await models.Bank.create(bankObject);
+      await models.Bank.create(bankObject2);
+
+      const result1 = await bankRepository.findByAccountId(
+        bankObject.accountId
+      );
+      const result2 = await bankRepository.findByAccountId(
+        bankObject2.accountId
+      );
+
+      expect(result1).toEqual(bankObject);
+      expect(result2).toEqual(bankObject2);
+    });
+    it("should return null if bank not found", async () => {
+      const found = await bankRepository.findById("fake");
+      expect(found).toBeNull();
+    });
+  });
+
   describe("create", () => {
     it("should create a bank", async () => {
       const result = await bankRepository.create(bankObject);
