@@ -14,6 +14,7 @@ import {
 } from "plaid";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { TRPCClientError } from "@trpc/client";
 
 export async function registerUser(userPayload: IRegisterPayload) {
   try {
@@ -25,7 +26,8 @@ export async function registerUser(userPayload: IRegisterPayload) {
       type: "personal",
     });
 
-    if (!dwollaCustomerUrl) throw new Error(`Failed to create dwolla customer`);
+    if (typeof dwollaCustomerUrl !== "string")
+      throw new Error(dwollaCustomerUrl?.error);
 
     // Next extract the id from the customerUrl
 
@@ -42,8 +44,10 @@ export async function registerUser(userPayload: IRegisterPayload) {
     });
 
     return user;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    return {
+      error: error?.message as string,
+    };
   }
 }
 

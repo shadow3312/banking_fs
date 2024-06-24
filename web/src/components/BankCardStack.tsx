@@ -27,7 +27,7 @@ export default function BankCardStack({ banks, user }: BankCardStackProps) {
   };
 
   useEffect(() => {
-    setSelectedBank(banks[visibleCardIndex || 0]);
+    setSelectedBank(banks[visibleCardIndex]);
   }, [visibleCardIndex, banks]);
 
   useEffect(() => {

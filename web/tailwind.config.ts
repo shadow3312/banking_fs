@@ -76,6 +76,7 @@ const config = {
         "custom-gradient": "linear-gradient(135deg, #000000,#210728, #000)",
         "credit-card": "url('/images/card-bg.png')",
         "debit-card": "url('/images/card2.png')",
+        app: "url('/images/app.png')",
       },
     },
   },

@@ -29,8 +29,10 @@ export const createDwollaCustomer = async (customer: IDwollaCustomer) => {
     const response = await dwolla.post("customers", customer);
 
     return response.headers.get("location");
-  } catch (error) {
-    console.log(`Failed to create dwolla customer ${error}`);
+  } catch (error: any) {
+    return {
+      error: error?.body?._embedded?.errors[0]?.message || error?.body?.message,
+    };
   }
 };
 

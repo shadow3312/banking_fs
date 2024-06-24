@@ -89,15 +89,19 @@ export default function AuthForm({ type }: AuthFormProps) {
           // Register a new user
           const newUser = await registerUser(values as IRegisterPayload);
 
+          if ("error" in newUser) {
+            throw new Error(newUser.error);
+          }
+
           setIsLoading(false);
 
-          toast({
-            title: "Hold on",
-            description: "You are being redirected quickly",
-          });
-
-          if (newUser) {
+          if (!("error" in newUser)) {
             // If user is successfuly registered, login
+            toast({
+              title: "Hold on",
+              description: "You are being redirected quickly",
+            });
+
             await signIn("credentials", {
               email: newUser.email,
               password: values.password!,
@@ -108,8 +112,12 @@ export default function AuthForm({ type }: AuthFormProps) {
           }
         }
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setIsLoading(false);
+      toast({
+        title: "Error",
+        description: error?.message as string,
+      });
     }
   }
   return (

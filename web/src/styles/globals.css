@@ -100,7 +100,7 @@
   }
 
   .auth-right {
-    @apply col-span-1 rounded-r-2xl bg-secondary dark:bg-primary;
+    @apply bg-app col-span-1 rounded-r-2xl bg-secondary bg-cover bg-center dark:bg-primary;
   }
   .auth-form-wrapper {
     @apply w-full space-y-4 px-2 text-center;
