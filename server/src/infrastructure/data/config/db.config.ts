@@ -1,3 +1,5 @@
+import env from "@/serverEnv";
+
 const dbConfig: IDbConfig = {
   test: {
     username: "root",
@@ -16,11 +18,11 @@ const dbConfig: IDbConfig = {
     logging: false,
   },
   production: {
-    username: "root",
-    password: "sikoyod1234",
-    database: "banking",
+    username: env.DB_USER,
+    password: env.DB_PASS,
+    database: env.DB_NAME,
     host: "127.0.0.1",
-    dialect: "mariadb",
+    dialect: env.DB_DIALECT,
     logging: false,
   },
 };
