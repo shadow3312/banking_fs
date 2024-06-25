@@ -39,7 +39,7 @@ git clone https://github.com/shadow3312/banking_fs.git
 - Navigate to the <a href="https://github.com/shadow3312/banking_fs/tree/master/server">server</a> folder
 
   ```bash
-  cd /server
+  cd server
   ```
 
 - Install requirements
@@ -97,6 +97,10 @@ git clone https://github.com/shadow3312/banking_fs.git
 #### Steps
 
 - Navigate to the <a href="https://github.com/shadow3312/banking_fs/tree/master/web">web</a> folder
+
+  ```bash
+  cd web
+  ```
 
 - Create a `.env` file, copy/paste the content from `.env.example` and update accordingly
 
