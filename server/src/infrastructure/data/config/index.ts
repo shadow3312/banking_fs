@@ -1,4 +1,4 @@
-import env from "@/env";
+import env from "@/serverEnv";
 import dbConfig from "./db.config";
 import { Sequelize } from "sequelize";
 

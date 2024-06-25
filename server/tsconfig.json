@@ -3,6 +3,7 @@
     "files": true
   },
   "compilerOptions": {
+    "composite": true,
     "target": "ESNext",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -15,7 +16,8 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
-      "~/*": ["__test__/fixtures/*"]
+      "~/*": ["__test__/fixtures/*"],
+      "@/serverEnv": ["src/env.ts"]
     },
     "typeRoots": ["./types", "./node_modules/@types"]
   },

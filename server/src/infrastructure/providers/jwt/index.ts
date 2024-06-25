@@ -1,4 +1,4 @@
-import env from "@/env";
+import env from "@/serverEnv";
 import jwt from "jsonwebtoken";
 
 const secret = env.JWT_SECRET;

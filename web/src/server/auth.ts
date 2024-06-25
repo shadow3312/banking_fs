@@ -55,7 +55,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
 
-      async authorize(credentials, req) {
+      async authorize(credentials, req): Promise<any> {
         const { email, password } = credentials as {
           email: string;
           password: string;

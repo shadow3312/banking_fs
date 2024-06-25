@@ -1,4 +1,6 @@
 {
+  "references": [{ "path": "../server" }],
+
   "compilerOptions": {
     /* Base Options: */
     "esModuleInterop": true,
@@ -11,7 +13,7 @@
 
     /* Strictness */
     "strict": true,
-    "noUncheckedIndexedAccess": true,
+    "noUncheckedIndexedAccess": false,
     "checkJs": true,
 
     /* Bundled projects */
@@ -27,7 +29,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "~/*": ["../server/src/*"]
+      "~/*": ["../server/src/*"],
+      "@/serverEnv": ["../server/src/env.ts"],
+      "@/application/*": ["../server/src/application/*"],
+      "@/domain/*": ["../server/src/domain/*"],
+      "@/infrastructure/*": ["../server/src/infrastructure/*"],
+      "@/presentation/*": ["../server/src/presentation/*"],
+      "@/shared/*": ["../server/src/shared/*"],
+      "@/types/*": ["../server/src/types/*"]
     }
   },
   "include": [
@@ -38,6 +47,7 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
+    "../server/src/types/**/*.d.ts",
     "global.d.ts"
   ],
   "exclude": ["node_modules"]
