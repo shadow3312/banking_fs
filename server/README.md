@@ -46,6 +46,12 @@ REST is fun, but needing a strong type safety and the personal peace of mind tha
   },
   ```
 
+  Run
+
+  ```bash
+  npm test
+  ```
+
 - Finally, launch the server
 
   ```bash
