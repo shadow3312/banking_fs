@@ -24,7 +24,7 @@ For testing purpose, you can choose `Chase` Bank with `Plaid Checking` and/or `P
   - Recoil
   - Tailwind CSS
 
-Check the <a href="https://github.com/shadow3312/banking_fs/tree/master/server">server README</a> and the <a href="https://github.com/shadow3312/banking_fs/tree/master/web">frontend README</a> for the whys.
+Check the <a href="https://github.com/shadow3312/banking_fs/tree/master/server/README.md">server README</a> and the <a href="https://github.com/shadow3312/banking_fs/tree/master/web/README.md">frontend README</a> for the whys.
 
 ## Running the project locally
 

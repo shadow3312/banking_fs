@@ -19,10 +19,12 @@ const createCaller = createCallerFactory(appRouter);
 app.use(express.json());
 app.use(morgan("common"));
 
-app.use("/auth", authRouter);
-app.use("/users", userRouter);
-app.use("/banks", bankRouter);
-app.use("/transactions", transactionRouter);
+// REST API ROUTES
+
+// app.use("/auth", authRouter);
+// app.use("/users", userRouter);
+// app.use("/banks", bankRouter);
+// app.use("/transactions", transactionRouter);
 
 app.use(
   "/trpc",
