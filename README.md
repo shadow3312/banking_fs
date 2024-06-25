@@ -52,7 +52,7 @@ git clone https://github.com/shadow3312/banking_fs.git
 
   P.S: This needs to be set according to the validation schema available <a href="https://github.com/shadow3312/banking_fs/tree/master/server/src/env.ts">here</a>. Otherwise, the project will fail to build
 
-- Create a local database `banking`. The database name can be set <a href="https://github.com/shadow3312/banking_fs/tree/master/server/src/infrastructure/data/config/db.config.ts#L13">here</a>
+- Create a local database `banking`. The database name can be set <a href="https://github.com/shadow3312/banking_fs/tree/master/server/src/infrastructure/data/config/db.config.ts#L15">here</a>
 
   ```typescript
   development: {
@@ -67,7 +67,7 @@ git clone https://github.com/shadow3312/banking_fs.git
 
 - Run integration tests
 
-  The integration tests requires a test database, which can be set <a href="https://github.com/shadow3312/banking_fs/tree/master/server/src/infrastructure/data/config/db.config.ts#L5">here</a>
+  The integration tests requires a test database, which can be set <a href="https://github.com/shadow3312/banking_fs/tree/master/server/src/infrastructure/data/config/db.config.ts#L7">here</a>
 
   ```typescript
   test: {
@@ -78,6 +78,12 @@ git clone https://github.com/shadow3312/banking_fs.git
     dialect: "mysql",
     logging: false,
   },
+  ```
+
+  Run
+
+  ```bash
+  npm test
   ```
 
 - Finally, launch the server
