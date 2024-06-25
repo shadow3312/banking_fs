@@ -11,11 +11,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import("next").NextConfig} */
 const config = {
-  webpack: (config) => {
-    config.resolve.alias["~"] = path.resolve(__dirname, "../server/src");
-
-    return config;
-  },
   eslint: {
     ignoreDuringBuilds: true,
   },
