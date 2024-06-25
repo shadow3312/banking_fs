@@ -102,6 +102,12 @@ git clone https://github.com/shadow3312/banking_fs.git
   cd web
   ```
 
+- Install dependencies
+
+  ```bash
+  npm install
+  ```
+
 - Create a `.env` file, copy/paste the content from `.env.example` and update accordingly
 
   This needs to be set according to the validation schema available <a href="https://github.com/shadow3312/banking_fs/tree/master/web/src/env.js">here</a>. Otherwise, the project will fail to build

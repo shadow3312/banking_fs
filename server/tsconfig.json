@@ -15,9 +15,9 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
+      "@/serverEnv": ["src/env.ts"],
       "@/*": ["src/*"],
-      "~/*": ["__test__/fixtures/*"],
-      "@/serverEnv": ["src/env.ts"]
+      "~/*": ["__test__/fixtures/*"]
     },
     "typeRoots": ["./types", "./node_modules/@types"]
   },
