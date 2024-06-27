@@ -8,6 +8,7 @@ const dbConfig: IDbConfig = {
     host: "localhost",
     dialect: "mysql",
     logging: false,
+    ssl: false,
   },
   development: {
     username: "root",
@@ -16,6 +17,7 @@ const dbConfig: IDbConfig = {
     host: "localhost",
     dialect: "mysql",
     logging: false,
+    ssl: false,
   },
   production: {
     username: env.DB_USER,
@@ -24,6 +26,7 @@ const dbConfig: IDbConfig = {
     host: env.DB_HOST,
     dialect: env.DB_DIALECT,
     logging: false,
+    ssl: true,
   },
 };
 

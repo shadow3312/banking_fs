@@ -17,6 +17,7 @@ export const sequelize = new Sequelize({
   username: config.username,
   password: config.password,
   logging: config.logging,
+  ssl: config.ssl,
 });
 
 const models: IModels = {
