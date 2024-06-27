@@ -20,7 +20,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            cd /usr/local/apps/banking_fs
+            cd /usr/local/apps/banking_fs/server
             git pull
             git status
             export NVM_DIR=~/.nvm
