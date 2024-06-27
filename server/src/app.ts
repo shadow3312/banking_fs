@@ -3,12 +3,6 @@ import morgan from "morgan";
 import env from "./env";
 import { makeDb } from "@/infrastructure/data/config";
 import * as trpcExpress from "@trpc/server/adapters/express";
-import {
-  authRouter,
-  bankRouter,
-  transactionRouter,
-  userRouter,
-} from "./presentation/http/routes";
 import appRouter from "./presentation/trpc/router";
 import { createCallerFactory, createContext } from "./presentation/trpc/trpc";
 const app = express();
