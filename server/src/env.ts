@@ -13,6 +13,7 @@ const env = cleanEnv(process.env, {
   DB_USER: str({ default: "" }),
   DB_PASS: str({ default: "" }),
   DB_NAME: str({ default: "" }),
+  DB_HOST: str({ default: "" }),
   DB_DIALECT: str({
     choices: [
       "mysql",

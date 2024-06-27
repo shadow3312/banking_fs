@@ -21,7 +21,7 @@ const dbConfig: IDbConfig = {
     username: env.DB_USER,
     password: env.DB_PASS,
     database: env.DB_NAME,
-    host: "127.0.0.1",
+    host: env.DB_HOST,
     dialect: env.DB_DIALECT,
     logging: false,
   },
