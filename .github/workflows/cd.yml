@@ -1,0 +1,31 @@
+name: Node.js CD
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  zbanking:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.x]
+    steps:
+      - name: Deploy zbanking using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /usr/local/apps/banking_fs
+            git pull
+            git status
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            npm ci
+            pm2 stop zbanking
+            pm2 delete zbanking
+            pm2 start npm --name="zbanking" -- start --watch -i max

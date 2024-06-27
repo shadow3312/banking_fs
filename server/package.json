@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "nodemon",
     "build": "ts-node -r tsconfig-paths/register src/app.ts --out-file dist/app.ts",
+    "prestart": "npm run build",
+    "start": "node dist/app.ts",
     "test": "jest --detectOpenHandles"
   },
   "_moduleAliases": {

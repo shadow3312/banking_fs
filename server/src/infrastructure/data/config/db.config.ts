@@ -24,10 +24,10 @@ const dbConfig: IDbConfig = {
     host: env.DB_HOST,
     dialect: env.DB_DIALECT,
     logging: false,
-    dialectOptions: {
-      ssl: true,
-      rejectUnauthorized: false,
-    },
+    // dialectOptions: {
+    //   ssl: true,
+    //   rejectUnauthorized: false,
+    // },
   },
 };
 
