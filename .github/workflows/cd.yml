@@ -2,7 +2,7 @@ name: Node.js CD
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   zbanking:
