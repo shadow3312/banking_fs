@@ -15,7 +15,10 @@ interface IConfig {
   host: string;
   dialect: Dialect;
   logging: boolean;
-  ssl: boolean;
+  dialectOptions?: {
+    ssl: boolean;
+    rejectUnauthorized: boolean;
+  };
 }
 
 interface IDbConfig {
