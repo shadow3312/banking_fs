@@ -6,7 +6,7 @@ I started this project because I wanted to test Plaid in a real life-like app. T
 
 ## Demo
 
-<img src="hhttps://zbanking.vercel.app/images/app-mock.png" />
+<img src="https://zbanking.vercel.app/images/app-mock.png" />
 
 Live <a href="https://zbanking.vercel.app">here</a>.
 
@@ -16,7 +16,7 @@ For testing purpose, you can choose `Chase` Bank with `Plaid Checking` and/or `P
 
 The plaid credentials here are: user_good and user_good
 
-<img src="hhttps://zbanking.vercel.app/images/cred.png" />
+<img src="https://zbanking.vercel.app/images/cred.png" />
 
 ## Built with
 
