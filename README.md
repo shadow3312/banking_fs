@@ -6,11 +6,17 @@ I started this project because I wanted to test Plaid in a real life-like app. T
 
 ## Demo
 
+<img src="hhttps://zbanking.vercel.app/images/app-mock.png" />
+
 Live <a href="https://zbanking.vercel.app">here</a>.
 
 > The live demo uses Plaid sandbox environment, so there is no need to enter real bank accounts information. Instead, Plaid provides default bank accounts.
 
 For testing purpose, you can choose `Chase` Bank with `Plaid Checking` and/or `Plaid Savings`
+
+The plaid credentials here are: user_good and user_good
+
+<img src="hhttps://zbanking.vercel.app/images/cred.png" />
 
 ## Built with
 
